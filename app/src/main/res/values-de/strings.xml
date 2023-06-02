@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="morning_greeting">Guten Morgen!</string>
+    <string name="day_greeting">Guten Tag!</string>
+    <string name="evening_greeting">Guten Abend</string>
+    <string name="night_greeting">Gute Nacht</string>
+    <string name="recent">Letzte Einträge:</string>
+    <string name="all">Alle Ansehen</string>
+</resources>
