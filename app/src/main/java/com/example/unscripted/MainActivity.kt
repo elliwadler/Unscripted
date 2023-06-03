@@ -19,13 +19,31 @@ class MainActivity : AppCompatActivity() {
         setupCalender()
 
         val dataList = listOf(
-            Pair(Date(), "Hello"),
-            Pair(Date(), "World")
+            Pair(Date(), "First Entry"),
+            Pair(Date(), "Second Entry"),
+            Pair(Date(), "Third Entry"),
+            // Add more entries as needed
         )
 
-        val recyclerView: RecyclerView = findViewById(R.id.list_recent_entries)
-        val adapter = EntryAdapter(dataList as MutableList<Pair<Date, String>>)
-        recyclerView.adapter = adapter
+        var listView: ListView = findViewById(R.id.list_recent_entries)
+
+        val height = 120 * dataList.size
+        val height_px= (height * resources.displayMetrics.density).toInt()
+
+        val layoutParams = listView.layoutParams
+        layoutParams.height = height_px
+        listView.layoutParams = layoutParams
+
+        val adapter = EntryListAdapter(this, dataList)
+        listView.adapter = adapter
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val selectedItem = dataList[position]
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("selectedItem", selectedItem)
+            startActivity(intent)
+        }
+
     }
     override fun onStart() {
         super.onStart()

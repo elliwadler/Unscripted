@@ -1,13 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+
     >
     <item
         android:id="@+id/navigation_item_2"
-        android:title="Add"
-        android:icon="@drawable/plus" />
+        android:title="@string/add"
+        android:icon="@drawable/plus"
+        />
 
 </menu>

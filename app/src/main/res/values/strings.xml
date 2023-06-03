@@ -6,4 +6,5 @@
     <string name="night_greeting">Good night!</string>
     <string name="recent">Recent Entries:</string>
     <string name="all">See All</string>
+    <string name="add">Add</string>
 </resources>
