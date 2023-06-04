@@ -1,16 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-
-    >
+    android:theme="@style/Theme.Custom"
+    app:labelVisibilityMode="unlabeled"
+    app:itemBackground="@drawable/custom_bottom_nav_item_background" >
     <item
-        android:id="@+id/navigation_item_2"
-        android:title="@string/add"
-        android:icon="@drawable/plus"
-        />
-
+        android:id="@+id/item2"
+        android:enabled="true"
+        android:icon="@drawable/home_icon"
+        android:title="Home"/>
+    <item
+        android:id="@+id/item1"
+        android:enabled="true"
+        android:icon="@drawable/plus_icon"
+        android:title="@string/add"/>
+    <item
+        android:id="@+id/item3"
+        android:enabled="true"
+        android:icon="@drawable/profile_icon"
+        android:title="Pofile"/>
 </menu>

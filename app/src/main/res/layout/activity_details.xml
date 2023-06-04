@@ -1,27 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="MissingClass">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/text_date_entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="02-06-2023"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/image_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/arrow_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_title_entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="02-06-2023"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/text_date_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"
+                android:text="date"
+                android:textSize="18sp"
 
+                app:layout_constraintEnd_toStartOf="@+id/image_delete"
+                app:layout_constraintStart_toEndOf="@+id/image_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_delete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+
+                android:src="@drawable/delete_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_edit"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+
+                android:src="@drawable/edit_icon"
+                app:layout_constraintEnd_toStartOf="@+id/image_delete"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_title_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Title"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.092"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_date_entry" />
+
+            <TextView
+                android:id="@+id/text_mood_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/orangy_yellow"
+                android:padding="3dp"
+                android:paddingEnd="10sp"
+                android:paddingStart="10sp"
+                android:text="Happy"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.092"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_entry" />
+
+            <ImageView
+                android:id="@+id/image_mood"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginTop="12dp"
+                android:src="@drawable/shy"
+                app:layout_constraintStart_toEndOf="@+id/text_mood_entry"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_entry" />
+
+            <ImageView
+                android:id="@+id/image_entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+
+                android:src="@drawable/placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_mood_entry" />
+
+            <TextView
+                android:id="@+id/text_text_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:justificationMode="inter_word"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at eros quis neque pellentesque aliquam at id ipsum. Maecenas dignissim tincidunt purus, id congue ligula hendrerit sed. Morbi feugiat convallis enim, vitae iaculis elit. Vestibulum finibus, mi id facilisis lobortis, dolor lacus lobortis odio, nec cursus ex urna eu ex. Duis eu arcu vitae sapien interdum mattis et vitae mauris. Suspendisse id turpis arcu. Curabitur laoreet magna nec purus auctor, vel luctus est pellentesque. In hac habitasse platea dictumst. Maecenas ultrices mauris id eros consectetur, sit amet pharetra ligula dictum. Sed mattis leo sed felis consequat, vitae iaculis justo feugiat. In consequat risus at dui auctor feugiat. Donec sit amet scelerisque tellus."
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_entry" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

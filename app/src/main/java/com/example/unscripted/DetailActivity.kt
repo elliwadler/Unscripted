@@ -1,6 +1,8 @@
 package com.example.unscripted
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
@@ -19,5 +21,14 @@ class DetailActivity : AppCompatActivity() {
         val stringTextView: TextView = findViewById(R.id.text_title_entry)
         dateTextView.text = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(selectedItem.first)
         stringTextView.text = selectedItem.second
+
+
+        val myImage: ImageView = findViewById(R.id.image_back)
+
+        myImage.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

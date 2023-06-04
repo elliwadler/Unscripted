@@ -3,11 +3,15 @@ package com.example.unscripted
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.CalendarView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.navigation.NavigationBarView
 import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
@@ -17,7 +21,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupCalender()
+        setupListView()
+        setupBottomNaviagtion()
+    }
+    override fun onStart() {
+        super.onStart()
 
+        val greetingText: TextView = findViewById(R.id.text_greeting)
+        greetingText.text = getGreetingBasedOnTime()
+    }
+
+
+    fun getDefaultIconId(item: MenuItem?): Int {
+        return when (item?.itemId) {
+            R.id.item1 -> R.drawable.plus_icon
+            R.id.item2 -> R.drawable.home_icon
+            R.id.item3 -> R.drawable.profile_icon
+            else -> 0
+        }
+    }
+
+    fun setupListView(){
         val dataList = listOf(
             Pair(Date(), "First Entry"),
             Pair(Date(), "Second Entry"),
@@ -43,13 +67,35 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("selectedItem", selectedItem)
             startActivity(intent)
         }
-
     }
-    override fun onStart() {
-        super.onStart()
 
-        val greetingText: TextView = findViewById(R.id.text_greeting)
-        greetingText.text = getGreetingBasedOnTime()
+    fun setupBottomNaviagtion(){
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_UNLABELED
+        var selectedItem: MenuItem? = null
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            selectedItem?.setIcon(getDefaultIconId(selectedItem))
+            item.setIcon(getSelectedIconId(item))
+            selectedItem = item
+            true
+        }
+    }
+    fun getSelectedIconId(item: MenuItem?): Int {
+        return when (item?.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(this, NewEntryActivity::class.java)
+                startActivity(intent)
+                R.drawable.plus_icon_selected
+            }
+            R.id.item2 -> {
+                R.drawable.home_icon_selected
+            }
+            R.id.item3 -> {
+                R.drawable.profile_icon_selected
+            }
+            else -> 0
+        }
     }
 
     private fun setupCalender(){
