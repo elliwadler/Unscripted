@@ -1,17 +1,16 @@
 package com.example.unscripted
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Pair
 import android.view.MenuItem
-import android.widget.AdapterView
 import android.widget.CalendarView
 import android.widget.ListView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.navigation.NavigationBarView
+import com.google.gson.Gson
 import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
@@ -61,10 +60,12 @@ class MainActivity : AppCompatActivity() {
         val adapter = EntryListAdapter(this, dataList)
         listView.adapter = adapter
 
+        val gson = Gson()
+
         listView.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = dataList[position]
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("selectedItem", selectedItem)
+            intent.putExtra("selectedItem", gson.toJson(selectedItem))
             startActivity(intent)
         }
     }
@@ -84,8 +85,8 @@ class MainActivity : AppCompatActivity() {
     fun getSelectedIconId(item: MenuItem?): Int {
         return when (item?.itemId) {
             R.id.item1 -> {
-                val intent = Intent(this, NewEntryActivity::class.java)
-                startActivity(intent)
+                /*val intent = Intent(this, NewEntryActivity::class.java)
+                startActivity(intent)*/
                 R.drawable.plus_icon_selected
             }
             R.id.item2 -> {
@@ -128,3 +129,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+

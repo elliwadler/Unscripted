@@ -5,15 +5,20 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.Objects
+
 
 class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        val gson = Gson()
+        gson.fromJson(intent.getStringExtra("selectedItem"), )
         val selectedItem = intent.getSerializableExtra("selectedItem") as Pair<Date, String>
 
         // Display the details in the layout
