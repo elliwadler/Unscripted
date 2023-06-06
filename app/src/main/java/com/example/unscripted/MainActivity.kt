@@ -41,10 +41,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setupListView(){
+        val e = Entry()
+        e.title = "First Entry"
+        e.date = Date()
+        e.text = "blabla"
+        e.image = "image1"
+
+        val e2 = Entry()
+        e2.title = "Second Entry"
+        e2.date = Date()
+        e2.text = "blabla"
+        e2.image = "image2"
         val dataList = listOf(
-            Pair(Date(), "First Entry"),
-            Pair(Date(), "Second Entry"),
-            Pair(Date(), "Third Entry"),
+            e,
+            e2
             // Add more entries as needed
         )
 
@@ -57,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         layoutParams.height = height_px
         listView.layoutParams = layoutParams
 
-        val adapter = EntryListAdapter(this, dataList)
+        val adapter = EntryAdapter(this, dataList)
         listView.adapter = adapter
 
         val gson = Gson()
@@ -85,8 +95,8 @@ class MainActivity : AppCompatActivity() {
     fun getSelectedIconId(item: MenuItem?): Int {
         return when (item?.itemId) {
             R.id.item1 -> {
-                /*val intent = Intent(this, NewEntryActivity::class.java)
-                startActivity(intent)*/
+                val intent = Intent(this, NewEntryActivity::class.java)
+                startActivity(intent)
                 R.drawable.plus_icon_selected
             }
             R.id.item2 -> {

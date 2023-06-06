@@ -2,19 +2,16 @@ package com.example.unscripted
 
 
 import android.content.Context
-import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import androidx.core.util.component1
-import androidx.core.util.component2
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class EntryListAdapter(private val context: Context, private val dataList: List<Pair<Date, String>>) :
+class EntryAdapter(private val context: Context, private val dataList: List<Entry>) :
     BaseAdapter() {
 
     override fun getCount(): Int {
@@ -41,8 +38,11 @@ class EntryListAdapter(private val context: Context, private val dataList: List<
             viewHolder = view.tag as ViewHolder
         }
 
-        val (date, string) = dataList[position]
-        viewHolder.bind(date, string)
+        val title = dataList[position].title
+        val date = dataList[position].date
+        val text = dataList[position].text
+        val image = dataList[position].image
+        viewHolder.bind( date, title, text, image)
 
         return view!!
     }
@@ -51,10 +51,11 @@ class EntryListAdapter(private val context: Context, private val dataList: List<
         private val dateTextView: TextView = view.findViewById(R.id.text_entry_item_date)
         private val stringTextView: TextView = view.findViewById(R.id.text_entry_title)
 
-        fun bind(date: Date, string: String) {
+
+        fun bind(date: Date, title: String, text:String, image:String) {
             val formattedDate = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(date)
             dateTextView.text = formattedDate
-            stringTextView.text = string
+            stringTextView.text = title
         }
     }
 }
