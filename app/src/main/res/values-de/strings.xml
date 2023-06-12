@@ -31,5 +31,8 @@
     <string name="btn_forgotpassword_submit_text">SENDEN</string>
     <string name="tv_login_slogan_text">Because life writes the best Scripts</string>
     <string name="tv_new_entry_text">NEW ENTRY</string>
-    <string name="til_new_entry_title_hint">Title</string>
+    <!--New Entry-->
+    <string name="til_new_entry_title_hint">Titel</string>
+    <string name="til_text">Text ...</string>
+    <string name="btn_save">Speichern</string>
 </resources>

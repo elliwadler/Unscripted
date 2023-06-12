@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_new_entry_title"
+            android:id="@+id/tv_new_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -26,7 +26,7 @@
 
 
     <ScrollView
-        android:id="@+id/sv_new_entry_svcontent"
+        android:id="@+id/sv_new_svcontent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +34,12 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_new_entry_activity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_new_entry_maincontent"
+            android:id="@+id/cl_new_maincontent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_new_entry_title"
+                android:id="@+id/til_new_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/et_16dp_margin"
@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
-                    android:id="@+id/et_register_firstname"
+                    android:id="@+id/et_new_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -59,55 +59,23 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_new_lastname"
+                android:id="@+id/til_new_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/et_16dp_margin"
-                android:hint="@string/til_lastname_hint"
+                android:hint="@string/til_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_new_entry_title">
+                app:layout_constraintTop_toBottomOf="@id/til_new_title">
 
                 <EditText
-                    android:id="@+id/et_register_lastname"
+                    android:id="@+id/et_new_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:padding="@dimen/et_16dp_padding"
                     android:textSize="@dimen/et_16sp_textsize"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_register_confirmpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/et_16dp_margin"
-                android:hint="@string/til_register_confirmpassword_hint"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_register_password">
-
-                <EditText
-                    android:id="@+id/et_register_confirmpassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:padding="@dimen/et_16dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <CheckBox
-                android:id="@+id/cb_register_termsandcondition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_16dp_margin"
-                android:checked="false"
-                android:text="@string/cb_register_termsandcondition_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_register_confirmpassword"/>
 
             <Button
                 android:id="@+id/btn_register_register"
@@ -117,39 +85,14 @@
                 android:layout_marginTop="@dimen/et_32dp_margin"
                 android:layout_marginEnd="@dimen/et_16dp_margin"
                 android:padding="@dimen/btn_8dp_padding"
-                android:text="@string/btn_register_register_text"
+                android:text="@string/btn_save"
                 android:textSize="@dimen/btn_18sp_textsize"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@color/pinkish_red"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cb_register_termsandcondition" />
+                app:layout_constraintTop_toBottomOf="@+id/til_new_text"/>
 
-            <LinearLayout
-                android:id="@+id/ll_register_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_32dp_margin"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_register_register">
 
-                <TextView
-                    android:id="@+id/tv_register_alreadyhaveanaccount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_register_alreadyhaveanaccount_text"
-                    android:textSize="@dimen/tv_16sp_textsize"/>
-
-                <TextView
-                    android:id="@+id/tv_register_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/tv_5dp_padding"
-                    android:text="@string/tv_register_login_text"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/tv_16sp_textsize"/>
-            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
