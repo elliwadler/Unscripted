@@ -10,34 +10,47 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Unscripted"
+        android:theme="@style/Theme.Unscripted.NoActionBar"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Unscripted.NoActionBar">
         </activity>
         <activity
             android:name=".DetailActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Unscripted.NoActionBar">
+        </activity>
+        <activity
+            android:name=".NewEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Unscripted.NoActionBar">
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Unscripted.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.DETAIL" />
-
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewEntryActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.DETAIL" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".RegistrationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Unscripted.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Unscripted.NoActionBar">
         </activity>
     </application>
 

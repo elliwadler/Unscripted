@@ -5,6 +5,31 @@
     <string name="evening_greeting">Guten Abend</string>
     <string name="night_greeting">Gute Nacht</string>
     <string name="recent">Letzte Einträge:</string>
-    <string name="all">Alle Ansehen</string>
+    <string name="all"><u>Alle Ansehen</u></string>
     <string name="add">Hinzufügen</string>
+    <!--LOGIN Screen-->
+    <string name="login_register"><u>Registrieren</u></string>
+    <string name="tv_login_title_text">Willkommen!</string>
+    <string name="et_login_email_hint">Email</string>
+    <string name="et_login_password_hint">Passwort</string>
+    <string name="btn_login_login_text">LOGIN</string>
+    <string name="tv_login_donthaveanaccount_text">Sie haben noch kein Konto?</string>
+    <string name="tv_login_register_text"><u>Registrieren</u></string>
+    <string name="tv_login_forgotpassword_text"><u>Passwort vergessen?</u></string>
+    <string name="tv_register_title_text">EIN KONTO ERSTELLEN</string>
+    <string name="til_register_firstname_hint">Vorname</string>
+    <string name="til_lastname_hint">Nachname</string>
+    <string name="til_register_confirmpassword_hint">Passwort bestätigen</string>
+    <string name="cb_register_termsandcondition_text">Ich stimme den <u>Allgemeinen Geschäftsbedingungen</u> zu</string>
+    <!--REGISTER Screen-->
+    <string name="btn_register_register_text">REGISTRIEREN</string>
+    <string name="tv_register_alreadyhaveanaccount_text">Sie haben bereits ein Konto?</string>
+    <string name="tv_register_login_text"><u>Login</u></string>
+    <!--FORGET PASSWORD Screen-->
+    <string name="tv_forgotpassword_title_text">PASSWORT VERGESSEN</string>
+    <string name="tv_forgotpassword_description_text">Bitte geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen eine E-Mail, um Ihr Passwort zurückzusetzen</string>
+    <string name="btn_forgotpassword_submit_text">SENDEN</string>
+    <string name="tv_login_slogan_text">Because life writes the best Scripts</string>
+    <string name="tv_new_entry_text">NEW ENTRY</string>
+    <string name="til_new_entry_title_hint">Title</string>
 </resources>

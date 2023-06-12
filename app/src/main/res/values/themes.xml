@@ -1,8 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Unscripted" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pinkish_red</item>
+        <item name="colorAccent">@color/green_cyan</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="android:statusBarColor">@color/pinkish_red</item>
 
     </style>
 
-    <style name="Theme.Unscripted" parent="Base.Theme.Unscripted" />
+    <style name="Theme.Unscripted.NoActionBar" parent="Base.Theme.Unscripted">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

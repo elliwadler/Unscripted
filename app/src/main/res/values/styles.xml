@@ -4,4 +4,5 @@
     <style name="Theme.Custom" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/pinkish_red</item>
     </style>
+
 </resources>

@@ -31,15 +31,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun getDefaultIconId(item: MenuItem?): Int {
-        return when (item?.itemId) {
-            R.id.item1 -> R.drawable.plus_icon
-            R.id.item2 -> R.drawable.home_icon
-            R.id.item3 -> R.drawable.profile_icon
-            else -> 0
-        }
-    }
-
     fun setupListView(){
         val e = Entry()
         e.title = "First Entry"
@@ -86,26 +77,10 @@ class MainActivity : AppCompatActivity() {
         var selectedItem: MenuItem? = null
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            selectedItem?.setIcon(getDefaultIconId(selectedItem))
-            item.setIcon(getSelectedIconId(item))
             selectedItem = item
+            val intent = Intent(this, NewEntryActivity::class.java)
+            startActivity(intent)
             true
-        }
-    }
-    fun getSelectedIconId(item: MenuItem?): Int {
-        return when (item?.itemId) {
-            R.id.item1 -> {
-                val intent = Intent(this, NewEntryActivity::class.java)
-                startActivity(intent)
-                R.drawable.plus_icon_selected
-            }
-            R.id.item2 -> {
-                R.drawable.home_icon_selected
-            }
-            R.id.item3 -> {
-                R.drawable.profile_icon_selected
-            }
-            else -> 0
         }
     }
 
@@ -139,4 +114,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
 

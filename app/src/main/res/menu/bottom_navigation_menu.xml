@@ -1,23 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/Theme.Custom"
-    app:labelVisibilityMode="unlabeled"
     app:itemBackground = "@color/white">
-
-
-    <item
-        android:id="@+id/item2"
-        android:enabled="true"
-        android:icon="@drawable/home_icon_selected"
-        android:title="Home"/>
     <item
         android:id="@+id/item1"
         android:enabled="true"
         android:icon="@drawable/plus_icon"
         android:title="@string/add"/>
-    <item
-        android:id="@+id/item3"
-        android:enabled="true"
-        android:icon="@drawable/profile_icon"
-        android:title="Pofile"/>
 </menu>

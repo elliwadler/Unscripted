@@ -5,6 +5,32 @@
     <string name="evening_greeting">Good evening!</string>
     <string name="night_greeting">Good night!</string>
     <string name="recent">Recent Entries:</string>
-    <string name="all">See All</string>
+    <string name="all"><u>See All</u></string>
     <string name="add">Add</string>
+    <!--LOGIN Screen-->
+    <string name="login_register"><u>Register</u></string>
+    <string name="tv_login_title_text">Welcome!</string>
+    <string name="et_login_email_hint">Email</string>
+    <string name="et_login_password_hint">Password</string>
+    <string name="btn_login_login_text">LOGIN</string>
+    <string name="tv_login_donthaveanaccount_text">Don\'t have an account?</string>
+    <string name="tv_login_register_text"><u>Register</u></string>
+    <string name="tv_login_forgotpassword_text"><u>Forgot Password?</u></string>
+    <string name="tv_register_title_text">CREATE AN ACCOUNT</string>
+    <string name="til_register_firstname_hint">First Name</string>
+    <string name="til_lastname_hint">Last name</string>
+    <string name="til_register_confirmpassword_hint">Confirm Password</string>
+    <string name="cb_register_termsandcondition_text">I Agree to the <u>Terms and Conditions</u></string>
+    <!--REGISTER Screen-->
+    <string name="btn_register_register_text">REGISTER</string>
+    <string name="tv_register_alreadyhaveanaccount_text">Already have an account?</string>
+    <string name="tv_register_login_text"><u>Login</u></string>
+    <!--FORGET PASSWORD Screen-->
+    <string name="tv_forgotpassword_title_text">FORGOT PASSWORD</string>
+    <string name="tv_forgotpassword_description_text">Please enter your e-mail and we\'ll send you an email to reset your password</string>
+    <string name="btn_forgotpassword_submit_text">SUBMIT</string>
+    <string name="tv_login_slogan_text">Because life writes the best Scripts</string>
+    <string name="tv_new_entry_text">NEW ENTRY</string>
+    <string name="til_new_entry_title_hint">Title</string>
+
 </resources>
