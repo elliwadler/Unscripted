@@ -35,4 +35,5 @@
     <string name="til_new_entry_title_hint">Titel</string>
     <string name="til_text">Text ...</string>
     <string name="btn_save">Speichern</string>
+    <string name="storage_permission_denied">Permission denied.</string>
 </resources>

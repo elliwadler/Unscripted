@@ -34,4 +34,5 @@
     <string name="til_new_entry_title_hint">Title</string>
     <string name="til_text">Text ...</string>
     <string name="btn_save">Save</string>
+    <string name="storage_permission_denied">Permission denied.</string>
 </resources>
