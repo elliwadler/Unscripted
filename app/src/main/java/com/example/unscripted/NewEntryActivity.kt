@@ -59,16 +59,16 @@ class NewEntryActivity : BasisActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+       /* super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == GALLERY_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, start image selection
+                // Permission granted, start image selection*/
                 pickImageFromGallery()
-            } else {
+         /*   } else {
                 // Permission denied
                 showCustomSnackbar(getString(R.string.storage_permission_denied), true)
             }
-        }
+        }*/
     }
 }
 

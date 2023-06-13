@@ -20,4 +20,6 @@
     <dimen name="btn_24sp_textsize">24sp</dimen>
     <dimen name="et_40dp_margin">40dp</dimen>
     <dimen name="et_150dp">150dp</dimen>
+    <dimen name="et_8dp_margin">8dp</dimen>
+    <dimen name="btn_3dp_padding">3dp</dimen>
 </resources>
