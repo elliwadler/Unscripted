@@ -3,7 +3,7 @@ package com.example.unscripted
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class ForgotPasswordActivity : AppCompatActivity(){
+class ForgotPasswordActivity : BasisActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

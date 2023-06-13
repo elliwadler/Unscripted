@@ -9,4 +9,6 @@
     <color name="green_cyan_light">#D5A3C1B4</color>
     <color name="orangy_yellow">#FFEB66</color>
     <color name="reddish_orange">#FA9D6B</color>
+    <color name="red">#FF4158</color>
+    <color name="green">#5BD15F</color>
 </resources>

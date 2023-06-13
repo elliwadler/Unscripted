@@ -78,6 +78,21 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/btn_new_addImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/et_16dp_margin"
+                android:layout_marginTop="@dimen/et_32dp_margin"
+                android:layout_marginEnd="@dimen/et_16dp_margin"
+                android:padding="@dimen/btn_8dp_padding"
+                android:text="Select Image"
+                android:textSize="@dimen/btn_18sp_textsize"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/pinkish_red"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_new_text"/>
+
+            <Button
                 android:id="@+id/btn_register_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@color/pinkish_red"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_new_text"/>
+                app:layout_constraintTop_toBottomOf="@+id/btn_new_addImage"/>
 
 
 

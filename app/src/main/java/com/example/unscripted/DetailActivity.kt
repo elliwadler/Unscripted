@@ -28,11 +28,6 @@ class DetailActivity : AppCompatActivity() {
             dateTextView.text = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(selectedItem.date)
             stringTextView.text = selectedItem.title
 
-            val myImage: ImageView = findViewById(R.id.image_back)
 
-            myImage.setOnClickListener {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
         }
 }

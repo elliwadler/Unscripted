@@ -20,15 +20,6 @@
             android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/image_back"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_date_entry"
@@ -40,8 +31,9 @@
                 android:textSize="18sp"
 
                 app:layout_constraintEnd_toStartOf="@+id/image_delete"
-                app:layout_constraintStart_toEndOf="@+id/image_back"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UnknownId" />
 
             <ImageView
                 android:id="@+id/image_delete"
