@@ -2,14 +2,11 @@ package com.example.unscripted
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Pair
-import android.view.MenuItem
 import android.widget.CalendarView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import java.time.LocalDate
 import java.util.Calendar
@@ -19,9 +16,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+      //  var horizontalScrollView:HorizontalScrollView = findViewById(R.id.hsc_main)
+       // horizontalScrollView.fullScroll(View.FOCUS_RIGHT)
         setupCalender()
         setupListView()
-        setupBottomNaviagtion()
+        setupFloatingActionButton()
     }
     override fun onStart() {
         super.onStart()
@@ -71,16 +70,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setupBottomNaviagtion(){
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_UNLABELED
-        var selectedItem: MenuItem? = null
-
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            selectedItem = item
+   private fun setupFloatingActionButton(){
+        val fabAdd:FloatingActionButton = findViewById(R.id.fabAdd)
+        fabAdd.setOnClickListener { item ->
             val intent = Intent(this, NewEntryActivity::class.java)
             startActivity(intent)
-            true
         }
     }
 

@@ -22,4 +22,6 @@
     <dimen name="et_150dp">150dp</dimen>
     <dimen name="et_8dp_margin">8dp</dimen>
     <dimen name="btn_3dp_padding">3dp</dimen>
+    <dimen name="btn_20sp_textsize">20sp</dimen>
+    <dimen name="et_50dp_margin">50dp</dimen>
 </resources>
