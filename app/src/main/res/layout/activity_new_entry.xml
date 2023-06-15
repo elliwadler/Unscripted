@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationActivity">
+    tools:context=".MainActivity"
+    tools:ignore="MissingClass">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_new_entry_activity"
+        android:id="@+id/toolbar_new_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,180 +17,306 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_new_title"
+            android:id="@+id/tv_register_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textStyle="bold"
-            android:text="@string/tv_new_entry_text"
+            android:text="New Entry"
             android:textSize="@dimen/tv_20sp_textsize" />
     </androidx.appcompat.widget.Toolbar>
 
-
     <ScrollView
-        android:id="@+id/sv_new_svcontent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_new_entry_activity">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_new_activity"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_new_maincontent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_new_title"
-                android:layout_width="match_parent"
+
+            <TextView
+                android:id="@+id/text_new_date"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/et_16dp_margin"
-                android:hint="@string/til_new_entry_title_hint"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="16dp"
+                android:textStyle="bold"
+                android:text="@string/new_entry"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radioGroup">
+                tools:ignore="MissingConstraints,UnknownId" />
 
-                <EditText
-                    android:id="@+id/et_new_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:padding="@dimen/et_16dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_image"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/text_title_entry"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/et_16dp_margin"
-                app:layout_constraintTop_toBottomOf="@+id/til_new_title">
-            <ImageView
-                android:id="@+id/img_picked"
-                app:layout_constraintTop_toBottomOf="@+id/til_new_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@color/purply_blue_light"
-                android:layout_width="200dp"
-                android:layout_gravity="top"
-                 android:layout_height="340dp"/>
-            <LinearLayout
-                android:id="@+id/ll_image2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-
-                app:layout_constraintTop_toBottomOf="@+id/til_new_title">
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/et_16dp_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <RadioButton
-                        android:id="@+id/button1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Happy"
-                        android:padding="@dimen/btn_3dp_padding"
-                        />
-
-                    <RadioButton
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sad"
-                        android:padding="@dimen/btn_3dp_padding"
-                        />
-
-                    <RadioButton
-                        android:id="@+id/button3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Angry"
-                        android:padding="@dimen/btn_3dp_padding"
-                        />
-                    <RadioButton
-                        android:id="@+id/button4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Excited"
-                        android:padding="@dimen/btn_3dp_padding"
-                        />
-                    <RadioButton
-                        android:id="@+id/button5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Frustrated"
-                        android:padding="@dimen/btn_3dp_padding"
-                        />
-                    <RadioButton
-                        android:id="@+id/button6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Calm"
-                        android:padding="@dimen/btn_3dp_padding"
-                        />
-
-                </RadioGroup>
-
-                <Button
-                android:id="@+id/btn_new_addImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/btn_8dp_padding"
-                android:text="Select Image"
+                android:layout_marginTop="30dp"
+                android:hint="What describes today the best?"
+                android:letterSpacing="0.2"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:maxLength="32"
                 android:layout_marginLeft="@dimen/et_16dp_margin"
-                android:layout_gravity="bottom"
-                android:textSize="@dimen/btn_18sp_textsize"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/purply_blue_light"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_picked"/>
-            </LinearLayout>
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/text_new_date" />
 
 
             <EditText
-                android:id="@+id/til_new_text"
+                android:id="@+id/text_text_entry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/btn_8dp_padding"
-                android:layout_marginTop="8dp"
-                android:hint="Text"
+                android:layout_marginTop="@dimen/et_16dp_margin"
+                android:justificationMode="inter_word"
+                android:layout_margin="@dimen/et_16dp_margin"
+                android:paddingLeft="@dimen/et_5dp_margin"
+                android:paddingRight="@dimen/et_5dp_margin"
+                android:paddingEnd="16dp"
+                android:hint="@string/new_entry_text"
+                android:lineSpacingExtra="@dimen/m2dp"
+                android:textColor="@color/darkgrey"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
                 android:inputType="textMultiLine"
-                android:padding="@dimen/et_16dp_padding"
-                android:textSize="@dimen/et_16sp_textsize"
+                android:maxLines="10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_entry"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/et_32dp_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_image" />
-
-            <Button
-                android:id="@+id/btn_register_register"
+                app:layout_constraintTop_toBottomOf="@+id/text_text_entry"/>
+            <LinearLayout
+                android:id="@+id/ll_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/et_16dp_margin"
-                android:layout_marginTop="@dimen/et_32dp_margin"
-                android:layout_marginEnd="@dimen/et_16dp_margin"
-                android:padding="@dimen/btn_8dp_padding"
-                android:text="@string/btn_save"
-                android:textSize="@dimen/btn_18sp_textsize"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/pinkish_red"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_new_text"/>
+                android:padding="@dimen/et_16dp_margin"
+
+                android:layout_marginBottom="@dimen/et_16dp_margin"
+                android:gravity="left|center"
+                app:layout_constraintTop_toBottomOf="@+id/divider1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today has been:"
+                    android:padding="@dimen/btn_8dp_padding"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
 
 
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon1ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/crying"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon2ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/sad"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon3ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/neutral"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon4ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/smile"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon5ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/love"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_info"/>
+
+            <LinearLayout
+                android:id="@+id/ll_weather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:padding="@dimen/et_16dp_margin"
+
+                android:layout_marginBottom="@dimen/et_16dp_margin"
+                android:gravity="left|center"
+                app:layout_constraintTop_toBottomOf="@+id/divider2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The weather was:"
+                    android:padding="@dimen/btn_8dp_padding"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
 
 
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon_weather_1_ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/snow"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon_weather_2_ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/rain"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon_weather_3_ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/cloud"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon_weather_4_ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/cloud_sun"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+                <ImageView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/icon_weather_5_ImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_item"
+                    android:src="@drawable/sun"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_weather"/>
+            <TextView
+                android:id="@+id/text_photo_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/et_32dp_margin"
+                android:text="Photos"
+                android:letterSpacing="0.2"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/et_16dp_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_weather" />
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:scrollbarSize="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_photo_entry">
+
+                <LinearLayout
+                    android:id="@+id/ll_photos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/et_16dp_margin"
+                    android:layout_marginTop="@dimen/et_16dp_margin"
+                    android:layout_marginBottom="@dimen/et_16dp_margin"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </HorizontalScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="45dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+        app:srcCompat="@drawable/image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="45dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+        app:srcCompat="@drawable/tick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/greenlight" />
 </androidx.constraintlayout.widget.ConstraintLayout>

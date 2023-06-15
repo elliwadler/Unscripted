@@ -24,4 +24,6 @@
     <dimen name="btn_3dp_padding">3dp</dimen>
     <dimen name="btn_20sp_textsize">20sp</dimen>
     <dimen name="et_50dp_margin">50dp</dimen>
+    <dimen name="stroke_1dp">1dp</dimen>
+    <dimen name="m2dp">2dp</dimen>
 </resources>

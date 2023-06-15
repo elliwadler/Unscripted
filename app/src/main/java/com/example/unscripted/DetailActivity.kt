@@ -1,22 +1,20 @@
 package com.example.unscripted
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
-import com.google.gson.JsonElement
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
-import java.util.Objects
 
 
 class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+
+        setupActionBar()
 
         val gson = Gson()
         val selectedItemJson = intent.getStringExtra("selectedItem")
@@ -30,4 +28,18 @@ class DetailActivity : AppCompatActivity() {
 
 
         }
+    private fun setupActionBar(){
+        val toolbarRegistrationActivity : Toolbar = findViewById(R.id.toolbar_detail_activity)
+        setSupportActionBar(toolbarRegistrationActivity)
+
+        val actionBar = supportActionBar
+        if(actionBar != null){
+            //This will make own action clickable and the "<-" at the left side
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.arrow_back)
+        }
+        toolbarRegistrationActivity.setNavigationOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
 }

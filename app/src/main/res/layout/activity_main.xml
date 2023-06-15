@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="32dp"
+        android:layout_margin="45dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
         app:srcCompat="@drawable/plus_icon1"
         app:layout_constraintBottom_toBottomOf="parent"

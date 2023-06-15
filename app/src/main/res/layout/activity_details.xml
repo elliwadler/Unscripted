@@ -8,28 +8,48 @@
     tools:context=".MainActivity"
     tools:ignore="MissingClass">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_detail_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Memory"
+            android:textSize="@dimen/tv_20sp_textsize" />
+    </androidx.appcompat.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_detail_activity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
 
             <TextView
                 android:id="@+id/text_date_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:layout_marginLeft="16dp"
                 android:textStyle="bold"
-                android:text="date"
+                android:text="@string/new_entry"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="UnknownId" />
+                tools:ignore="MissingConstraints,UnknownId" />
 
             <TextView
                 android:id="@+id/text_title_entry"
@@ -53,6 +73,8 @@
                 android:justificationMode="inter_word"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
+                android:lineSpacingExtra="@dimen/m2dp"
+                android:textColor="@color/darkgrey"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at eros quis neque pellentesque aliquam at id ipsum. Maecenas dignissim tincidunt purus, id congue ligula hendrerit sed. Morbi feugiat convallis enim, vitae iaculis elit. Vestibulum finibus, mi id facilisis lobortis, dolor lacus lobortis odio, nec cursus ex urna eu ex. Duis eu arcu vitae sapien interdum mattis et vitae mauris. Suspendisse id turpis arcu. Curabitur laoreet magna nec purus auctor, vel luctus est pellentesque. In hac habitasse platea dictumst. Maecenas ultrices mauris id eros consectetur, sit amet pharetra ligula dictum. Sed mattis leo sed felis consequat, vitae iaculis justo feugiat. In consequat risus at dui auctor feugiat. Donec sit amet scelerisque tellus."
                 android:textAlignment="viewStart"
                 android:textSize="14sp"
@@ -75,7 +97,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/laughing" />
+                    android:src="@drawable/smile" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -171,7 +193,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="32dp"
+        android:layout_margin="45dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
         app:srcCompat="@drawable/edit_icon"
         app:layout_constraintBottom_toBottomOf="parent"

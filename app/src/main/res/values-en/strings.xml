@@ -35,4 +35,6 @@
     <string name="til_text">Text ...</string>
     <string name="btn_save">Save</string>
     <string name="storage_permission_denied">Permission denied.</string>
+    <string name="new_entry">New entry</string>
+    <string name="new_entry_text">What was special about today</string>
 </resources>
