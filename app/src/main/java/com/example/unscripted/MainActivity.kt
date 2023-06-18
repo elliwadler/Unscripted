@@ -1,27 +1,61 @@
 package com.example.unscripted
 
+import Entry
+import EntryAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.CalendarView
 import android.widget.ListView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import java.time.LocalDate
 import java.util.Calendar
-import java.util.Date
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : BasisActivity() {
+
+    private lateinit var dataList: List<Entry>
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-      //  var horizontalScrollView:HorizontalScrollView = findViewById(R.id.hsc_main)
-       // horizontalScrollView.fullScroll(View.FOCUS_RIGHT)
         setupCalender()
         setupListView()
         setupFloatingActionButton()
+        setupActionBar()
+
+        auth = FirebaseAuth.getInstance()
     }
+    private fun setupActionBar(){
+        val toolbarRegistrationActivity : Toolbar = findViewById(R.id.toolbar_main_activity)
+        setSupportActionBar(toolbarRegistrationActivity)
+
+        val actionBar = supportActionBar
+        if(actionBar != null){
+            //This will make own action clickable and the "<-" at the left side
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.logout)
+        }
+        toolbarRegistrationActivity.setNavigationOnClickListener{
+            auth.signOut()
+            navigateToLoginScreen()
+        }
+    }
+
+    private fun navigateToLoginScreen() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        finish()
+    }
+
     override fun onStart() {
         super.onStart()
 
@@ -29,63 +63,88 @@ class MainActivity : AppCompatActivity() {
         greetingText.text = getGreetingBasedOnTime()
     }
 
+    override fun onResume() {
+        super.onResume()
 
-    fun setupListView(){
-        var e = Entry()
-        e.title = "First Entry"
-        e.date = Date()
-        e.text = "blabla"
-
-        var e2 = Entry()
-        e2.title = "Second Entry"
-        e2.date = Date()
-        e2.text = "blabla"
-        val dataList = listOf(
-            e,
-            e2
-            // Add more entries as needed
-        )
-
-        var listView: ListView = findViewById(R.id.list_recent_entries)
-
-        val height = 120 * dataList.size
-        val height_px= (height * resources.displayMetrics.density).toInt()
-
-        val layoutParams = listView.layoutParams
-        layoutParams.height = height_px
-        listView.layoutParams = layoutParams
-
-        val adapter = EntryAdapter(this, dataList)
-        listView.adapter = adapter
-
-        val gson = Gson()
-
-        listView.setOnItemClickListener { parent, view, position, id ->
-            val selectedItem = dataList[position]
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("selectedItem", gson.toJson(selectedItem))
-            startActivity(intent)
-        }
+        setupListView()
     }
 
-   private fun setupFloatingActionButton(){
-        val fabAdd:FloatingActionButton = findViewById(R.id.fabAdd)
+    private fun setupListView() {
+        val cloudFirestore = CloudFirestore()
+        val currentUserID = cloudFirestore.getCurrentUserID()
+
+        cloudFirestore.getAllEntries(
+            onSuccess = { retrievedDataList ->
+                val filteredList = retrievedDataList.filter { entry -> entry.userId == currentUserID }
+                dataList = filteredList.sortedByDescending { it.date }.take(5) // Take only the first five items
+
+                val listView: ListView = findViewById(R.id.list_recent_entries)
+
+                val height = 120 * dataList.size
+                val heightPx = (height * resources.displayMetrics.density).toInt()
+
+                val layoutParams = listView.layoutParams
+                layoutParams.height = heightPx
+                listView.layoutParams = layoutParams
+
+                val adapter = EntryAdapter(this, dataList)
+                listView.adapter = adapter
+
+                val gson = Gson()
+
+                listView.setOnItemClickListener { parent, view, position, id ->
+                    val selectedItem: Entry = dataList[position]
+                    val intent = Intent(this, DetailActivity::class.java)
+                    intent.putExtra("selectedItem", selectedItem)
+                    startActivity(intent)
+                }
+            },
+            onFailure = { exception ->
+                showCustomSnackbar(exception!!.toString(), true)
+            }
+        )
+    }
+
+
+    private fun setupFloatingActionButton() {
+        val fabAdd: FloatingActionButton = findViewById(R.id.fabAdd)
         fabAdd.setOnClickListener { item ->
             val intent = Intent(this, NewEntryActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun setupCalender(){
-        //setup calender
-        val currentDate = LocalDate.now()
+    private fun setupCalendar() {
+        val calendarView: CalendarView = findViewById(R.id.calendar_1)
 
+        val cloudFirestore = CloudFirestore()
+        val currentUserID = cloudFirestore.getCurrentUserID()
+
+        // Retrieve all entries for the current user
+        cloudFirestore.getAllEntries(
+            onSuccess = { retrievedDataList ->
+                val entryDates = retrievedDataList.filter { entry -> entry.userId == currentUserID }
+                    .map { entry -> entry.date }
+                    .distinct()
+
+                // Set the highlighted dates on the calendar view
+                for (entryDate in entryDates) {
+                    val calendar: Calendar = Calendar.getInstance().apply {
+                        timeInMillis = entryDate.time
+                    }
+                    val highlightedDateInMillis: Long = calendar.timeInMillis
+                    calendarView.setDateHighlighted(highlightedDateInMillis, true)
+                }
+            },
+            onFailure = { exception ->
+                showCustomSnackbar(exception!!.toString(), true)
+            }
+        )
+
+        val currentDate = LocalDate.now()
         val currentYear: Int = currentDate.year
         val currentMonth: Int = currentDate.monthValue
         val currentDay: Int = currentDate.dayOfMonth
-
-
-        val calendarView: CalendarView = findViewById(R.id.calendar_1)
 
         val calendar: Calendar = Calendar.getInstance().apply {
             set(currentYear, currentMonth, currentDay)
@@ -95,7 +154,8 @@ class MainActivity : AppCompatActivity() {
         calendarView.date = defaultDateInMillis
     }
 
-    fun getGreetingBasedOnTime(): String {
+
+    private fun getGreetingBasedOnTime(): String {
         val calendar = Calendar.getInstance()
 
         return when (calendar.get(Calendar.HOUR_OF_DAY)) {
@@ -106,6 +166,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-
-

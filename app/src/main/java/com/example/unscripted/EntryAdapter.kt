@@ -1,5 +1,3 @@
-package com.example.unscripted
-
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.unscripted.R
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 class EntryAdapter(private val context: Context, private val dataList: List<Entry>) :
     BaseAdapter() {
+
 
     override fun getCount(): Int {
         return dataList.size
@@ -38,11 +37,8 @@ class EntryAdapter(private val context: Context, private val dataList: List<Entr
             viewHolder = view.tag as ViewHolder
         }
 
-        val title = dataList[position].title
-        val date = dataList[position].date
-        val text = dataList[position].text
-        val imagePaths = dataList[position].imagePaths
-        viewHolder.bind( date, title, text, imagePaths)
+        val entry = dataList[position]
+        viewHolder.bind(entry)
 
         return view!!
     }
@@ -51,21 +47,13 @@ class EntryAdapter(private val context: Context, private val dataList: List<Entr
         private val dateTextView: TextView = view.findViewById(R.id.text_entry_item_date)
         private val stringTextView: TextView = view.findViewById(R.id.text_entry_title)
 
-
-        fun bind(date: Date?, title: String, text: String, image: MutableList<String>) {
-            val formattedDate = date?.let {
+        fun bind(entry: Entry) {
+            val formattedDate = entry.date?.let {
                 SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(it)
             } ?: "N/A" // Provide a default value if date is null
 
-            val formattedImage = image ?: "" // Provide a default value if image is null
-
             dateTextView.text = formattedDate
-            stringTextView.text = title
-            // Use the formattedImage variable where you need to set the image
-            // For example, if you have an ImageView:
-            // imageView.setImageURI(Uri.parse(formattedImage))
+            stringTextView.text = entry.title
         }
-
-
     }
 }

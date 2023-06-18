@@ -30,4 +30,7 @@
     <dimen name="sb_0dp">0dp</dimen>
     <dimen name="Im_40dp">40dp</dimen>
     <dimen name="textsize_14sp">14sp</dimen>
+    <dimen name="iv_30dp_margin">30dp</dimen>
+    <dimen name="et_100dp_width">100dp</dimen>
+    <dimen name="et_100dp_height">100dp</dimen>
 </resources>

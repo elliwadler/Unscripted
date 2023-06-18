@@ -17,20 +17,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
            >
-    <TextView
-        android:id="@+id/text_greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/et_32dp_margin"
-        android:text="Hello World!"
-        android:textAlignment="viewStart"
-        android:textStyle="bold"
-        android:textSize="@dimen/btn_32sp_textsize"
 
-        app:layout_constraintBottom_toTopOf="@+id/calendar_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_main_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/text_greeting"
+                    android:layout_marginTop="@dimen/et_32dp_margin"
+                    android:text="Hello World!"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/tv_20sp_textsize" />
+            </androidx.appcompat.widget.Toolbar>
 
 
 
@@ -42,7 +47,7 @@
         android:theme="@style/Theme.Custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_greeting" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main_activity" />
 
 
     <TextView

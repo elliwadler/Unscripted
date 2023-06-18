@@ -1,5 +1,6 @@
 package com.example.unscripted
 
+import Entry
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +8,6 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -16,13 +16,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.UUID
 
 
 class NewEntryActivity : BasisActivity() {
@@ -57,30 +56,24 @@ class NewEntryActivity : BasisActivity() {
         }
 
         val ok: FloatingActionButton = findViewById(R.id.fabOK)
+            ok.setOnClickListener {
+                if (createNewEntry()) {
+                    val etTitle: EditText = findViewById(R.id.et_new_title)
+                    val etText: EditText = findViewById(R.id.et_new_text)
 
-        ok.setOnClickListener {
-            if (createNewEntry()) {
-                myEntry = Entry()
-                myEntry?.title = "First E"
-                myEntry?.date = Date()
-                myEntry?.text = "blabla"
-                myEntry?.mood = getSelectedMoodIconNumber()
-                myEntry?.weather = getSelectedWeatherIconNumber()
+                    val title: String = etTitle.text.toString().trim { it <= ' ' }
+                    val text: String = etText.text.toString().trim { it <= ' ' }
 
-                ok.setOnClickListener {
-                    if (createNewEntry()) {
-                        myEntry = Entry()
-                        myEntry?.title = "First E"
-                        myEntry?.date = Date()
-                        myEntry?.text = "blabla"
-                        myEntry?.mood = getSelectedMoodIconNumber()
-                        myEntry?.weather = getSelectedWeatherIconNumber()
+                    myEntry = Entry()
+                    myEntry?.id =  UUID.randomUUID().toString()
+                    myEntry?.title = title
+                    myEntry?.date = Date()
+                    myEntry?.text = text
+                    myEntry?.mood = getSelectedMoodIconNumber()
+                    myEntry?.weather = getSelectedWeatherIconNumber()
 
-                        val cloudFirestore = CloudFirestore()
-                        cloudFirestore.saveEntryInfoOnCloudFirestore(this, myEntry!!)
-                    }
-                }
-
+                    val cloudFirestore = CloudFirestore()
+                    cloudFirestore.saveEntryInfoOnCloudFirestore(this, myEntry!!)
             }
         }
 
@@ -256,26 +249,22 @@ class NewEntryActivity : BasisActivity() {
             val linearLayout: LinearLayout = findViewById(R.id.ll_photos)
 
             val imageView = ImageView(this)
-            //imageView.setImageURI(imgUri) // Set the desired image resource
-
             val sizeInPx = 100.dpToPx()
 
             val layoutParams = LinearLayout.LayoutParams(sizeInPx, sizeInPx)
             layoutParams.setMargins(0, 0, 8.dpToPx(), 0)
             imageView.layoutParams = layoutParams
 
-            val imagePath = imgUri // Replace with the actual path to your image
-
-            Glide.with(this)
-                .load(imagePath)
-                .transform(CenterCrop()) // Crop to 1:1 and add rounded corners (optional)
-                .into(imageView)
+            imageView.setImageURI(imgUri) // Set the image URI directly
 
             linearLayout.addView(imageView, layoutParams)
 
-            myEntry?.imagePaths?.add(imagePath.toString())
+            // Assuming `myEntry` is the instance of Entry class
+            myEntry?.imagePaths?.add(imgUri.toString())
         }
     }
+
+
 
     fun Int.dpToPx(): Int {
         return (this * Resources.getSystem().displayMetrics.density).toInt()
@@ -297,8 +286,8 @@ class NewEntryActivity : BasisActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-       /* super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == GALLERY_PERMISSION_REQUEST_CODE) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+       /* if (requestCode == GALLERY_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, start image selection*/
                 pickImageFromGallery()
@@ -310,7 +299,7 @@ class NewEntryActivity : BasisActivity() {
     }
 
     fun newEntrySuccess() {
-        TODO("Not yet implemented")
+        onBackPressedDispatcher.onBackPressed()
     }
 }
 

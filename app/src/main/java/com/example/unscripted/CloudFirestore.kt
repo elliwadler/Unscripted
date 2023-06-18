@@ -1,5 +1,6 @@
 package com.example.unscripted
 
+import Entry
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,6 +39,17 @@ class CloudFirestore {
             }
     }
 
+    fun deleteEntryCloudFirestore(detailActivity:DetailActivity, entry:Entry) {
+        firestoreInstance.collection(Constant.TABLENAME_ENTRY).document(entry.id!!)
+            .delete()
+            .addOnSuccessListener {
+                detailActivity.deleteEntrySuccess()
+            }
+            .addOnFailureListener { exc ->
+                Log.e("Error", "An error occurred!", exc)
+            }
+    }
+
     fun getUserDetails(LoginActivity: LoginActivity) {
         firestoreInstance
             .collection(Constant.TABLENAME_USER)
@@ -52,11 +64,27 @@ class CloudFirestore {
             }
     }
 
-    private fun getCurrentUserID(): String {
+    fun getCurrentUserID(): String {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             return currentUser.uid
         }
         return ""
+    }
+
+    fun getAllEntries(onSuccess: (List<Entry>) -> Unit, onFailure: (Exception) -> Unit) {
+        firestoreInstance.collection(Constant.TABLENAME_ENTRY)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val entries = mutableListOf<Entry>()
+                for (document in querySnapshot) {
+                    val entry = document.toObject(Entry::class.java)
+                    entries.add(entry)
+                }
+                onSuccess(entries)
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
     }
 }

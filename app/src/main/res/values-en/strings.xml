@@ -39,4 +39,14 @@
     <string name="new_entry_text">What was special about today</string>
     <string name="weather_info">The weather was:</string>
     <string name="mood_text">Today has been:</string>
+    <string name="crying">Very bad</string>
+    <string name="sad">bad</string>
+    <string name="neutral">Neutral</string>
+    <string name="laughing">good</string>
+    <string name="love">Very good</string>
+    <string name="snow">Snow</string>
+    <string name="rain">Rain</string>
+    <string name="Cloud">Cloudy</string>
+    <string name="cloud_sun">Changeable</string>
+    <string name="sun">Sunny</string>
 </resources>
