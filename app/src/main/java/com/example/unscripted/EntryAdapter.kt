@@ -41,8 +41,8 @@ class EntryAdapter(private val context: Context, private val dataList: List<Entr
         val title = dataList[position].title
         val date = dataList[position].date
         val text = dataList[position].text
-        val image = dataList[position].image
-        viewHolder.bind( date, title, text, image)
+        val imagePaths = dataList[position].imagePaths
+        viewHolder.bind( date, title, text, imagePaths)
 
         return view!!
     }
@@ -52,10 +52,20 @@ class EntryAdapter(private val context: Context, private val dataList: List<Entr
         private val stringTextView: TextView = view.findViewById(R.id.text_entry_title)
 
 
-        fun bind(date: Date, title: String, text:String, image:String) {
-            val formattedDate = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(date)
+        fun bind(date: Date?, title: String, text: String, image: MutableList<String>) {
+            val formattedDate = date?.let {
+                SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(it)
+            } ?: "N/A" // Provide a default value if date is null
+
+            val formattedImage = image ?: "" // Provide a default value if image is null
+
             dateTextView.text = formattedDate
             stringTextView.text = title
+            // Use the formattedImage variable where you need to set the image
+            // For example, if you have an ImageView:
+            // imageView.setImageURI(Uri.parse(formattedImage))
         }
+
+
     }
 }

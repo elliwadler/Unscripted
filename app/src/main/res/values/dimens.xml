@@ -26,4 +26,8 @@
     <dimen name="et_50dp_margin">50dp</dimen>
     <dimen name="stroke_1dp">1dp</dimen>
     <dimen name="m2dp">2dp</dimen>
+    <dimen name="margin_45dp">45dp</dimen>
+    <dimen name="sb_0dp">0dp</dimen>
+    <dimen name="Im_40dp">40dp</dimen>
+    <dimen name="textsize_14sp">14sp</dimen>
 </resources>

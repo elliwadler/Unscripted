@@ -37,4 +37,6 @@
     <string name="storage_permission_denied">Permission denied.</string>
     <string name="new_entry">New entry</string>
     <string name="new_entry_text">What was special about today</string>
+    <string name="weather_info">The weather was:</string>
+    <string name="mood_text">Today has been:</string>
 </resources>

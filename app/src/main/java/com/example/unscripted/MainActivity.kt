@@ -31,17 +31,15 @@ class MainActivity : AppCompatActivity() {
 
 
     fun setupListView(){
-        val e = Entry()
+        var e = Entry()
         e.title = "First Entry"
         e.date = Date()
         e.text = "blabla"
-        e.image = "image1"
 
-        val e2 = Entry()
+        var e2 = Entry()
         e2.title = "Second Entry"
         e2.date = Date()
         e2.text = "blabla"
-        e2.image = "image2"
         val dataList = listOf(
             e,
             e2

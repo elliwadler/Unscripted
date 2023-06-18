@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_register_title"
+            android:id="@+id/tv_new_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -43,19 +43,19 @@
                 android:id="@+id/text_new_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginTop="@dimen/et_32dp_margin"
+                android:layout_marginLeft="@dimen/et_16dp_margin"
                 android:textStyle="bold"
                 android:text="@string/new_entry"
-                android:textSize="18sp"
+                android:textSize="@dimen/btn_18sp_textsize"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints,UnknownId" />
 
             <EditText
-                android:id="@+id/text_title_entry"
+                android:id="@+id/et_new_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/et_32dp_margin"
                 android:hint="What describes today the best?"
                 android:letterSpacing="0.2"
                 android:textAlignment="viewStart"
@@ -68,7 +68,7 @@
 
 
             <EditText
-                android:id="@+id/text_text_entry"
+                android:id="@+id/et_new_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/et_16dp_margin"
@@ -76,16 +76,16 @@
                 android:layout_margin="@dimen/et_16dp_margin"
                 android:paddingLeft="@dimen/et_5dp_margin"
                 android:paddingRight="@dimen/et_5dp_margin"
-                android:paddingEnd="16dp"
+                android:paddingEnd="@dimen/et_16dp_margin"
                 android:hint="@string/new_entry_text"
                 android:lineSpacingExtra="@dimen/m2dp"
                 android:textColor="@color/darkgrey"
                 android:textAlignment="viewStart"
-                android:textSize="14sp"
+                android:textSize="@dimen/textsize_14sp"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_title_entry"/>
+                app:layout_constraintTop_toBottomOf="@+id/et_new_title"/>
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider1"
@@ -94,9 +94,9 @@
                 android:layout_marginTop="@dimen/et_32dp_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_text_entry"/>
+                app:layout_constraintTop_toBottomOf="@+id/et_new_text"/>
             <LinearLayout
-                android:id="@+id/ll_info"
+                android:id="@+id/ll_new_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +109,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Today has been:"
+                    android:text="@string/mood_text"
                     android:padding="@dimen/btn_8dp_padding"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"></TextView>
@@ -118,53 +118,53 @@
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon1ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/crying"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon2ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/sad"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon3ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/neutral"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon4ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/smile"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon5ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/love"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
 
@@ -176,10 +176,10 @@
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_info"/>
+                app:layout_constraintTop_toBottomOf="@+id/ll_new_info"/>
 
             <LinearLayout
-                android:id="@+id/ll_weather"
+                android:id="@+id/ll_new_weather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +192,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="The weather was:"
+                    android:text="@string/weather_info"
                     android:padding="@dimen/btn_8dp_padding"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"></TextView>
@@ -201,53 +201,53 @@
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_1_ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/snow"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_2_ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/rain"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_3_ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/cloud"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_4_ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/cloud_sun"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_5_ImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/Im_40dp"
+                    android:layout_height="@dimen/Im_40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/sun"
-                    android:padding="8dp"
+                    android:padding="@dimen/btn_8dp_padding"
                     android:clickable="true"
                     android:focusable="true" />
 
@@ -260,7 +260,7 @@
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_weather"/>
+                app:layout_constraintTop_toBottomOf="@+id/ll_new_weather"/>
             <TextView
                 android:id="@+id/text_photo_entry"
                 android:layout_width="wrap_content"
@@ -269,17 +269,17 @@
                 android:text="Photos"
                 android:letterSpacing="0.2"
                 android:textAlignment="viewStart"
-                android:textSize="20sp"
+                android:textSize="@dimen/btn_20sp_textsize"
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/et_16dp_margin"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_weather" />
+                app:layout_constraintTop_toBottomOf="@+id/ll_new_weather" />
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:scrollbarSize="0dp"
+                android:scrollbarSize="@dimen/sb_0dp"
                 app:layout_constraintTop_toBottomOf="@+id/text_photo_entry">
 
                 <LinearLayout
@@ -301,7 +301,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="45dp"
+        android:layout_margin="@dimen/margin_45dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
         app:srcCompat="@drawable/image"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -313,7 +313,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="45dp"
+        android:layout_margin="@dimen/margin_45dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
         app:srcCompat="@drawable/tick"
         app:layout_constraintBottom_toBottomOf="parent"

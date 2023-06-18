@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -19,6 +21,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 
@@ -28,6 +31,8 @@ class NewEntryActivity : BasisActivity() {
 
     private var selectedImageView_smiley: ImageView? = null
     private var selectedImageView_weather: ImageView? = null
+
+    private var myEntry: Entry? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +59,44 @@ class NewEntryActivity : BasisActivity() {
         val ok: FloatingActionButton = findViewById(R.id.fabOK)
 
         ok.setOnClickListener {
-          //  val ok: FloatingActionButton = findViewById(R.id.new)
+            if (createNewEntry()) {
+                myEntry = Entry()
+                myEntry?.title = "First E"
+                myEntry?.date = Date()
+                myEntry?.text = "blabla"
+                myEntry?.mood = getSelectedMoodIconNumber()
+                myEntry?.weather = getSelectedWeatherIconNumber()
+
+                ok.setOnClickListener {
+                    if (createNewEntry()) {
+                        myEntry = Entry()
+                        myEntry?.title = "First E"
+                        myEntry?.date = Date()
+                        myEntry?.text = "blabla"
+                        myEntry?.mood = getSelectedMoodIconNumber()
+                        myEntry?.weather = getSelectedWeatherIconNumber()
+
+                        val cloudFirestore = CloudFirestore()
+                        cloudFirestore.saveEntryInfoOnCloudFirestore(this, myEntry!!)
+                    }
+                }
+
+            }
         }
 
+
+        addIconOnClickListener()
+
+        val textNewDate: TextView = findViewById(R.id.text_new_date)
+
+        val currentDate = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(currentDate)
+
+        textNewDate.text = formattedDate
+    }
+
+    private fun addIconOnClickListener() {
         val icon1ImageView: ImageView = findViewById(R.id.icon1ImageView)
         val icon2ImageView: ImageView = findViewById(R.id.icon2ImageView)
         val icon3ImageView: ImageView = findViewById(R.id.icon3ImageView)
@@ -107,15 +147,85 @@ class NewEntryActivity : BasisActivity() {
         icon_weather_5ImageView.setOnClickListener {
             handleIconClickWeather(icon_weather_5ImageView)
         }
-
-        val textNewDate: TextView = findViewById(R.id.text_new_date)
-
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        val formattedDate = dateFormat.format(currentDate)
-
-        textNewDate.text = formattedDate
     }
+
+    private fun createNewEntry(): Boolean {
+        val etTitle: EditText = findViewById(R.id.et_new_title)
+        val etText: EditText = findViewById(R.id.et_new_text)
+
+        val title: String = etTitle.text.toString().trim { it <= ' ' }
+        val text: String = etText.text.toString().trim { it <= ' ' }
+
+        val moodIconNumber: Int = getSelectedMoodIconNumber()
+        val weatherIconNumber: Int = getSelectedWeatherIconNumber()
+
+        val returnValue = when {
+            title.isEmpty() -> {
+                showCustomSnackbar("Please enter a title.", true)
+                false
+            }
+            text.isEmpty() -> {
+                showCustomSnackbar("Please enter a text.", true)
+                false
+            }
+            moodIconNumber == -1 -> {
+                showCustomSnackbar("Please select an icon from the mood group.", true)
+                false
+            }
+            weatherIconNumber == -1 -> {
+                showCustomSnackbar("Please select an icon from the weather group.", true)
+                false
+            }
+            else -> true
+        }
+
+        return returnValue
+    }
+
+    private fun getSelectedMoodIconNumber(): Int {
+        val icon1ImageView: ImageView = findViewById(R.id.icon1ImageView)
+        val icon2ImageView: ImageView = findViewById(R.id.icon2ImageView)
+        val icon3ImageView: ImageView = findViewById(R.id.icon3ImageView)
+        val icon4ImageView: ImageView = findViewById(R.id.icon4ImageView)
+        val icon5ImageView: ImageView = findViewById(R.id.icon5ImageView)
+
+        if (icon1ImageView.isSelected) {
+            return 1
+        } else if (icon2ImageView.isSelected) {
+            return 2
+        } else if (icon3ImageView.isSelected) {
+            return 3
+        } else if (icon4ImageView.isSelected) {
+            return 4
+        } else if (icon5ImageView.isSelected) {
+            return 5
+        }
+
+        return -1
+    }
+
+    private fun getSelectedWeatherIconNumber(): Int {
+        val iconWeather1ImageView: ImageView = findViewById(R.id.icon_weather_1_ImageView)
+        val iconWeather2ImageView: ImageView = findViewById(R.id.icon_weather_2_ImageView)
+        val iconWeather3ImageView: ImageView = findViewById(R.id.icon_weather_3_ImageView)
+        val iconWeather4ImageView: ImageView = findViewById(R.id.icon_weather_4_ImageView)
+        val iconWeather5ImageView: ImageView = findViewById(R.id.icon_weather_5_ImageView)
+
+        if (iconWeather1ImageView.isSelected) {
+            return 1
+        } else if (iconWeather2ImageView.isSelected) {
+            return 2
+        } else if (iconWeather3ImageView.isSelected) {
+            return 3
+        } else if (iconWeather4ImageView.isSelected) {
+            return 4
+        } else if (iconWeather5ImageView.isSelected) {
+            return 5
+        }
+
+        return -1
+    }
+
 
     private fun handleIconClick(clickedImageView: ImageView) {
         // Clear the selection if there is a previously selected ImageView
@@ -162,6 +272,8 @@ class NewEntryActivity : BasisActivity() {
                 .into(imageView)
 
             linearLayout.addView(imageView, layoutParams)
+
+            myEntry?.imagePaths?.add(imagePath.toString())
         }
     }
 
@@ -195,6 +307,10 @@ class NewEntryActivity : BasisActivity() {
                 showCustomSnackbar(getString(R.string.storage_permission_denied), true)
             }
         }*/
+    }
+
+    fun newEntrySuccess() {
+        TODO("Not yet implemented")
     }
 }
 

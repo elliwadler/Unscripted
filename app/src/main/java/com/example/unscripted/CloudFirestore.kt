@@ -12,36 +12,51 @@ class CloudFirestore {
     private val firestoreInstance = FirebaseFirestore.getInstance()
     private val storageRef = Firebase.storage.reference
 
-    fun saveUserInfoOnCloudFirestore(registrationActivity: RegistrationActivity, currentUser:User){
+    fun saveUserInfoOnCloudFirestore(registrationActivity: RegistrationActivity, currentUser: User) {
         firestoreInstance.collection(Constant.TABLENAME_USER)
             .document(currentUser.id.toString())
             .set(currentUser, SetOptions.merge())
             .addOnSuccessListener {
                 registrationActivity.userRegistrationSuccess()
             }
-            .addOnFailureListener{exc ->
-                Log.e("test", "error occured", exc)
+            .addOnFailureListener { exc ->
+                Log.e("Error", "An error occurred!", exc)
             }
     }
 
-    fun getUserDetails(LoginActivity:LoginActivity){
+    fun saveEntryInfoOnCloudFirestore(newEntryActivity: NewEntryActivity, newEntry: Entry) {
+        newEntry.userId = getCurrentUserID() // Set the user ID as a field in the Entry object
+
+        firestoreInstance.collection(Constant.TABLENAME_ENTRY)
+            .document(newEntry.id.toString())
+            .set(newEntry, SetOptions.merge())
+            .addOnSuccessListener {
+                newEntryActivity.newEntrySuccess()
+            }
+            .addOnFailureListener { exc ->
+                Log.e("Error", "An error occurred!", exc)
+            }
+    }
+
+    fun getUserDetails(LoginActivity: LoginActivity) {
         firestoreInstance
             .collection(Constant.TABLENAME_USER)
             .document(getCurrentUserID())
             .get()
             .addOnSuccessListener { document ->
-                val user:User = document.toObject(User::class.java)!!
+                val user: User = document.toObject(User::class.java)!!
                 LoginActivity.userLoggedInSuccess(user)
             }
-            .addOnFailureListener{exc ->
-                Log.e(LoginActivity.javaClass.name, "error occured", exc)
+            .addOnFailureListener { exc ->
+                Log.e(LoginActivity.javaClass.name, "An error occurred!", exc)
             }
     }
 
-    private fun getCurrentUserID():String{
+    private fun getCurrentUserID(): String {
         val currentUser = FirebaseAuth.getInstance().currentUser
-        if(currentUser != null)
+        if (currentUser != null) {
             return currentUser.uid
-        return  ""
+        }
+        return ""
     }
 }
