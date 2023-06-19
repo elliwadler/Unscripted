@@ -161,12 +161,6 @@
                     android:layout_marginBottom="@dimen/et_16dp_margin"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/placeholder"
-                        android:layout_marginRight="@dimen/et_8dp_margin"
-                        android:layout_gravity="center_vertical" />
 
 
                 </LinearLayout>

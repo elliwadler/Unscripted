@@ -3,44 +3,55 @@ package com.example.unscripted
 import Entry
 import android.app.AlertDialog
 import android.content.res.Resources
-import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 
+
 class DetailActivity : BasisActivity() {
+    private lateinit var storageRef: StorageReference
+    private lateinit var db: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        setupActionBar()
+        val storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
+        db = FirebaseFirestore.getInstance()
 
+        setupActionBar()
         displayData()
 
         val btnDelete: FloatingActionButton = findViewById(R.id.fabDelete)
         btnDelete.setOnClickListener {
-            val selectedItem = intent.getParcelableExtra<Entry>("selectedItem")
-
-            val dialog = AlertDialog.Builder(this)
-                .setTitle("Delete Entry")
-                .setMessage("Are you sure you want to delete this entry?")
-                .setPositiveButton("Delete") { _, _ ->
-                    // User confirmed deletion, proceed with deleting the entry
-                    val firestore = CloudFirestore()
-                    firestore.deleteEntryCloudFirestore(this, selectedItem!!)
-                }
-                .setNegativeButton("Cancel", null)
-                .create()
-
-            dialog.show()
+           deleteAction()
         }
+    }
 
+    private fun deleteAction() {
+        val selectedItem = intent.getParcelableExtra<Entry>("selectedItem")
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Delete Entry")
+            .setMessage("Are you sure you want to delete this entry?")
+            .setPositiveButton("Delete") { _, _ ->
+                val firestore = CloudFirestore()
+                firestore.deleteEntryCloudFirestore(this, selectedItem!!)
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+
+        dialog.show()
     }
 
     private fun displayData() {
@@ -101,30 +112,45 @@ class DetailActivity : BasisActivity() {
         textViewWeather.text= textWeather.toString()
 
         val llPhotos: LinearLayout = findViewById(R.id.ll_photos)
-        val imageUris: List<String> = selectedItem?.imagePaths ?: emptyList()
+        val imageUris: MutableList<String> = selectedItem?.imagePaths!!
 
-        // Iterate through the image URIs and create ImageView instances dynamically
-        for (imageUriString in imageUris) {
-            val linearLayout: LinearLayout = findViewById(R.id.ll_photos)
-
-            val imageView = ImageView(this)
-            val sizeInPx = 100.dpToPx()
-
-            val layoutParams = LinearLayout.LayoutParams(sizeInPx, sizeInPx)
-            layoutParams.setMargins(0, 0, 8.dpToPx(), 0)
-            imageView.layoutParams = layoutParams
-
-            imageView.setImageURI(Uri.parse(imageUriString)) // Set the image URI directly
-
-            linearLayout.addView(imageView, layoutParams)
-
-
-            val imageUri = Uri.parse(imageUriString)
-            imageView.setImageURI(imageUri)
-
-            llPhotos.addView(imageView)
-        }
+        retrieveImagesForEntry(selectedItem?.id!!)
     }
+
+    private fun retrieveImagesForEntry(entryId: String) {
+        val folderRef = storageRef.child("images/$entryId")
+
+        folderRef.listAll()
+            .addOnSuccessListener { listResult ->
+                val linearLayout: LinearLayout = findViewById(R.id.ll_photos)
+
+                for (imageRef in listResult.items) {
+                    imageRef.downloadUrl
+                        .addOnSuccessListener { downloadUrl ->
+                            // Use the download URL to display or process the image
+                            val imageUrl = downloadUrl.toString()
+
+                            val imageView = ImageView(this)
+                            val sizeInPx = 100.dpToPx()
+
+                            val layoutParams = LinearLayout.LayoutParams(sizeInPx, sizeInPx)
+                            layoutParams.setMargins(0, 0, 8.dpToPx(), 0)
+                            imageView.layoutParams = layoutParams
+
+                            Glide.with(this).load(imageUrl).into(imageView)
+
+                            linearLayout.addView(imageView, layoutParams)
+                        }
+                        .addOnFailureListener {
+                            showCustomSnackbar("Can not load image.", true)
+                        }
+                }
+            }
+            .addOnFailureListener {
+                showCustomSnackbar("Can not load image.", true)
+            }
+    }
+
     fun Int.dpToPx(): Int {
         return (this * Resources.getSystem().displayMetrics.density).toInt()
     }
@@ -136,7 +162,6 @@ class DetailActivity : BasisActivity() {
 
         val actionBar = supportActionBar
         if(actionBar != null){
-            //This will make own action clickable and the "<-" at the left side
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.arrow_back)
         }

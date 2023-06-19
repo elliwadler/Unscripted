@@ -13,9 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import java.time.LocalDate
 import java.util.Calendar
-import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
+
 
 
 class MainActivity : BasisActivity() {
@@ -26,12 +24,13 @@ class MainActivity : BasisActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupCalender()
+
+        auth = FirebaseAuth.getInstance()
+
+        setupCalendar()
         setupListView()
         setupFloatingActionButton()
         setupActionBar()
-
-        auth = FirebaseAuth.getInstance()
     }
     private fun setupActionBar(){
         val toolbarRegistrationActivity : Toolbar = findViewById(R.id.toolbar_main_activity)
@@ -39,7 +38,6 @@ class MainActivity : BasisActivity() {
 
         val actionBar = supportActionBar
         if(actionBar != null){
-            //This will make own action clickable and the "<-" at the left side
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.logout)
         }
@@ -120,20 +118,31 @@ class MainActivity : BasisActivity() {
         val cloudFirestore = CloudFirestore()
         val currentUserID = cloudFirestore.getCurrentUserID()
 
-        // Retrieve all entries for the current user
         cloudFirestore.getAllEntries(
             onSuccess = { retrievedDataList ->
                 val entryDates = retrievedDataList.filter { entry -> entry.userId == currentUserID }
                     .map { entry -> entry.date }
                     .distinct()
 
-                // Set the highlighted dates on the calendar view
-                for (entryDate in entryDates) {
-                    val calendar: Calendar = Calendar.getInstance().apply {
-                        timeInMillis = entryDate.time
+                calendarView.setOnDateChangeListener { _, year, month, day ->
+                    val selectedCalendar = Calendar.getInstance().apply {
+                        set(year, month, day)
                     }
-                    val highlightedDateInMillis: Long = calendar.timeInMillis
-                    calendarView.setDateHighlighted(highlightedDateInMillis, true)
+
+                    val selectedDateInMillis = selectedCalendar.timeInMillis
+
+                    if (entryDates.any { entryDate ->
+                            val entryCalendar = Calendar.getInstance().apply {
+                                timeInMillis = entryDate!!.time
+                            }
+                            entryCalendar.get(Calendar.YEAR) == year &&
+                                    entryCalendar.get(Calendar.MONTH) == month &&
+                                    entryCalendar.get(Calendar.DAY_OF_MONTH) == day
+                        }) {
+                    } else {
+                        // Handle the selected non-highlighted date
+                        // ...
+                    }
                 }
             },
             onFailure = { exception ->
@@ -143,16 +152,14 @@ class MainActivity : BasisActivity() {
 
         val currentDate = LocalDate.now()
         val currentYear: Int = currentDate.year
-        val currentMonth: Int = currentDate.monthValue
+        val currentMonth: Int = currentDate.monthValue - 1 // Months are zero-based in CalendarView
         val currentDay: Int = currentDate.dayOfMonth
 
-        val calendar: Calendar = Calendar.getInstance().apply {
+        calendarView.date = Calendar.getInstance().apply {
             set(currentYear, currentMonth, currentDay)
-        }
-
-        val defaultDateInMillis: Long = calendar.timeInMillis
-        calendarView.date = defaultDateInMillis
+        }.timeInMillis
     }
+
 
 
     private fun getGreetingBasedOnTime(): String {

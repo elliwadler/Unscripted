@@ -1,11 +1,12 @@
 package com.example.unscripted
 
 import Entry
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.EditText
@@ -17,6 +18,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -33,60 +37,78 @@ class NewEntryActivity : BasisActivity() {
 
     private var myEntry: Entry? = null
 
+    private var entryId: String? = null
+    private var imageUris: MutableList<Uri> = mutableListOf()
+
+    private lateinit var storageRef: StorageReference
+    private lateinit var db: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_entry)
 
+        val storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
+        db = FirebaseFirestore.getInstance()
+
         setupActionBar()
+
+        this.entryId = UUID.randomUUID().toString()
 
         val pickImage: FloatingActionButton = findViewById(R.id.fabPhoto)
 
         pickImage.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                // Permission already granted, start image selection
-                pickImageFromGallery()
-            } else {
-                // Request permission
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(READ_EXTERNAL_STORAGE),
-                    GALLERY_PERMISSION_REQUEST_CODE
-                )
-            }
+            checkPermission()
         }
 
         val ok: FloatingActionButton = findViewById(R.id.fabOK)
-            ok.setOnClickListener {
-                if (createNewEntry()) {
-                    val etTitle: EditText = findViewById(R.id.et_new_title)
-                    val etText: EditText = findViewById(R.id.et_new_text)
-
-                    val title: String = etTitle.text.toString().trim { it <= ' ' }
-                    val text: String = etText.text.toString().trim { it <= ' ' }
-
-                    myEntry = Entry()
-                    myEntry?.id =  UUID.randomUUID().toString()
-                    myEntry?.title = title
-                    myEntry?.date = Date()
-                    myEntry?.text = text
-                    myEntry?.mood = getSelectedMoodIconNumber()
-                    myEntry?.weather = getSelectedWeatherIconNumber()
-
-                    val cloudFirestore = CloudFirestore()
-                    cloudFirestore.saveEntryInfoOnCloudFirestore(this, myEntry!!)
+        ok.setOnClickListener {
+            if (createNewEntryCheck()) {
+                createNewEntry()
             }
         }
-
 
         addIconOnClickListener()
 
         val textNewDate: TextView = findViewById(R.id.text_new_date)
-
         val currentDate = Calendar.getInstance().time
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         val formattedDate = dateFormat.format(currentDate)
 
         textNewDate.text = formattedDate
+    }
+
+    private fun createNewEntry() {
+        val title: String  = findViewById<EditText?>(R.id.et_new_title).text.toString().trim { it <= ' ' }
+        val text: String=  findViewById<EditText?>(R.id.et_new_text).text.toString().trim { it <= ' ' }
+
+        myEntry = Entry()
+        myEntry?.id =  entryId
+        myEntry?.title = title
+        myEntry?.date = Date()
+        myEntry?.text = text
+        myEntry?.mood = getSelectedMoodIconNumber()
+        myEntry?.weather = getSelectedWeatherIconNumber()
+
+        uploadImages()
+        val cloudFirestore = CloudFirestore()
+        cloudFirestore.saveEntryInfoOnCloudFirestore(this, myEntry!!)
+    }
+
+    private fun checkPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED) {
+            // Permission already granted, start image selection
+            pickImageFromGallery()
+        } else {
+            // Request permission
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                GALLERY_PERMISSION_REQUEST_CODE
+            )
+        }
     }
 
     private fun addIconOnClickListener() {
@@ -142,12 +164,9 @@ class NewEntryActivity : BasisActivity() {
         }
     }
 
-    private fun createNewEntry(): Boolean {
-        val etTitle: EditText = findViewById(R.id.et_new_title)
-        val etText: EditText = findViewById(R.id.et_new_text)
-
-        val title: String = etTitle.text.toString().trim { it <= ' ' }
-        val text: String = etText.text.toString().trim { it <= ' ' }
+    private fun createNewEntryCheck(): Boolean {
+        val title: String  = findViewById<EditText?>(R.id.et_new_title).text.toString().trim { it <= ' ' }
+        val text: String=  findViewById<EditText?>(R.id.et_new_text).text.toString().trim { it <= ' ' }
 
         val moodIconNumber: Int = getSelectedMoodIconNumber()
         val weatherIconNumber: Int = getSelectedWeatherIconNumber()
@@ -221,18 +240,14 @@ class NewEntryActivity : BasisActivity() {
 
 
     private fun handleIconClick(clickedImageView: ImageView) {
-        // Clear the selection if there is a previously selected ImageView
         selectedImageView_smiley?.isSelected = false
 
-        // Set the clicked ImageView as the selected one
         clickedImageView.isSelected = true
         selectedImageView_smiley = clickedImageView
     }
     private fun handleIconClickWeather(clickedImageView: ImageView) {
-        // Clear the selection if there is a previously selected ImageView
         selectedImageView_weather?.isSelected = false
 
-        // Set the clicked ImageView as the selected one
         clickedImageView.isSelected = true
         selectedImageView_weather = clickedImageView
     }
@@ -255,12 +270,11 @@ class NewEntryActivity : BasisActivity() {
             layoutParams.setMargins(0, 0, 8.dpToPx(), 0)
             imageView.layoutParams = layoutParams
 
-            imageView.setImageURI(imgUri) // Set the image URI directly
+            imageView.setImageURI(imgUri)
 
             linearLayout.addView(imageView, layoutParams)
 
-            // Assuming `myEntry` is the instance of Entry class
-            myEntry?.imagePaths?.add(imgUri.toString())
+            imageUris.add((imgUri!!))
         }
     }
 
@@ -285,24 +299,51 @@ class NewEntryActivity : BasisActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-       /* if (requestCode == GALLERY_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, start image selection*/
-                pickImageFromGallery()
-         /*   } else {
-                // Permission denied
-                showCustomSnackbar(getString(R.string.storage_permission_denied), true)
-            }
-        }*/
-    }
+  private fun uploadImages() {
+      val entryId = this.entryId
 
+      if (entryId == null) {
+          // Entry ID not available, handle the error scenario
+          return
+      }
+
+      for (imageUri in imageUris) {
+          val imageId = UUID.randomUUID().toString()
+          val fileName = "$entryId/$imageId.jpg"
+          val uploadRef = storageRef.child("images/$fileName")
+
+          // Upload each image to Firebase Storage
+          val uploadTask = uploadRef.putFile(imageUri)
+
+          uploadTask.addOnSuccessListener { taskSnapshot ->
+              val imageUrl = taskSnapshot.metadata?.reference?.downloadUrl.toString()
+
+              // Save the image URL to Firestore
+              saveImageInfo(entryId, imageId, imageUrl)
+          }.addOnFailureListener { exception ->
+              // Handle the failure scenario
+          }
+      }
+  }
+
+    private fun saveImageInfo(entryId: String, imageId: String, imageUrl: String) {
+        val imagesCollectionRef = db.collection("entries").document(entryId)
+            .collection("images")
+
+        val imageDocRef = imagesCollectionRef.document(imageId)
+        val imageData = hashMapOf(
+            "imageId" to imageId,
+            "imageUrl" to imageUrl
+        )
+        imageDocRef.set(imageData)
+            .addOnSuccessListener {
+                // Image document created successfully with the download URL
+            }
+            .addOnFailureListener { exception ->
+                // Handle unsuccessful document creation
+            }
+    }
     fun newEntrySuccess() {
         onBackPressedDispatcher.onBackPressed()
     }
 }
-
-
-
-
