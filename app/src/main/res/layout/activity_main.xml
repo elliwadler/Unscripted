@@ -48,39 +48,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_main_activity" />
+            <LinearLayout
+                android:id="@+id/ll_main_entries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/calendar_1"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/text_recent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/et_32dp_margin"
+                    android:layout_marginLeft="@dimen/et_20dp_margin"
+                    android:text="@string/recent"
+                    android:textSize="@dimen/btn_24sp_textsize" />
 
 
-    <TextView
-        android:id="@+id/text_recent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/et_32dp_margin"
-        android:layout_marginLeft="@dimen/et_20dp_margin"
-        android:text="@string/recent"
-        android:textAlignment="viewStart"
-        android:textSize="@dimen/btn_24sp_textsize"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_1"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end">
 
-    <TextView
-        android:id="@+id/text_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/et_40dp_margin"
-        android:layout_marginRight="@dimen/et_20dp_margin"
-        android:text="@string/all"
-        android:textAlignment="viewEnd"
-        android:textSize="@dimen/btn_18sp_textsize"
-        android:textStyle="bold"
+                    <ImageView
+                        android:id="@+id/main_search"
+                        android:layout_width="@dimen/iv_30dp_margin"
+                        android:layout_height="@dimen/iv_30dp_margin"
+                        android:src="@drawable/search"
+                        android:layout_marginTop="@dimen/et_32dp_margin"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/et_100dp_height"
+                        android:layout_marginLeft="@dimen/et_20dp_margin" />
+
+                    <TextView
+                        android:id="@+id/text_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/et_32dp_margin"
+                        android:layout_marginLeft="@dimen/et_20dp_margin"
+                        android:text="@string/all"
+                        android:layout_marginRight="@dimen/et_16dp_margin"
+                        android:textSize="@dimen/btn_18sp_textsize"
+                        android:textStyle="bold"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </LinearLayout>
 
 
-        app:layout_constraintTop_toBottomOf="@+id/calendar_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
 
-
-    <ListView
+            <ListView
         android:id="@+id/list_recent_entries"
         android:layout_width="match_parent"
         android:layout_height="@dimen/et_16dp_margin"
@@ -88,7 +108,7 @@
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
         android:nestedScrollingEnabled="false"
-        app:layout_constraintTop_toBottomOf="@+id/text_all"
+        app:layout_constraintTop_toBottomOf="@+id/ll_main_entries"
         tools:ignore="MissingConstraints" />
 
 

@@ -2,9 +2,11 @@ package com.example.unscripted
 
 import Entry
 import EntryAdapter
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.CalendarView
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -12,26 +14,76 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import java.time.LocalDate
+import java.time.ZoneId
 import java.util.Calendar
-
 
 
 class MainActivity : BasisActivity() {
 
     private lateinit var dataList: List<Entry>
     private lateinit var auth: FirebaseAuth
+    private lateinit var search: ImageView
+    private lateinit var searchDate: Calendar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
+        searchDate = Calendar.getInstance()
 
         setupCalendar()
-        setupListView()
+        setupListView(5)
         setupFloatingActionButton()
         setupActionBar()
+        setupSearchView()
+
+        var see_all = findViewById<TextView>(R.id.text_all)
+        see_all.setOnClickListener{
+            show_all_Entries()
+        }
     }
+
+    private fun show_all_Entries() {
+        setupListView(null)
+        val listView: ListView = findViewById(R.id.list_recent_entries)
+        val adapter = EntryAdapter(this, dataList)
+        listView.adapter = adapter
+
+    }
+
+
+    private fun setupSearchView() {
+        search= findViewById(R.id.main_search)
+        search.setOnClickListener{
+            performSearch(null)
+        }
+    }
+
+    private fun performSearch(query: String?) {
+        val year = searchDate.get(Calendar.YEAR)
+        val month = searchDate.get(Calendar.MONTH)
+        val day = searchDate.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            val selectedDate = LocalDate.of(selectedYear, selectedMonth + 1, selectedDay)
+            searchDate.setTime(java.util.Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            val filteredList = dataList.filter { entry ->
+                val entryDate = entry.date!!.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                entryDate == selectedDate
+            }
+
+            // Update your ListView with the filtered list of entries
+            val listView: ListView = findViewById(R.id.list_recent_entries)
+            val adapter = EntryAdapter(this, filteredList)
+            listView.adapter = adapter
+        }, year, month, day)
+
+        datePicker.show()
+
+    }
+
+
     private fun setupActionBar(){
         val toolbarRegistrationActivity : Toolbar = findViewById(R.id.toolbar_main_activity)
         setSupportActionBar(toolbarRegistrationActivity)
@@ -64,17 +116,19 @@ class MainActivity : BasisActivity() {
     override fun onResume() {
         super.onResume()
 
-        setupListView()
+        setupListView(5)
     }
 
-    private fun setupListView() {
+    private fun setupListView(amount:Int?) {
         val cloudFirestore = CloudFirestore()
         val currentUserID = cloudFirestore.getCurrentUserID()
 
         cloudFirestore.getAllEntries(
             onSuccess = { retrievedDataList ->
                 val filteredList = retrievedDataList.filter { entry -> entry.userId == currentUserID }
-                dataList = filteredList.sortedByDescending { it.date }.take(5) // Take only the first five items
+                dataList = if(amount == null)
+                    filteredList.sortedByDescending { it.date }.take(filteredList.size)
+                else filteredList.sortedByDescending { it.date }.take(amount)
 
                 val listView: ListView = findViewById(R.id.list_recent_entries)
 
@@ -139,9 +193,11 @@ class MainActivity : BasisActivity() {
                                     entryCalendar.get(Calendar.MONTH) == month &&
                                     entryCalendar.get(Calendar.DAY_OF_MONTH) == day
                         }) {
+                        // Mark the selected date
+                        calendarView.entry
                     } else {
-                        // Handle the selected non-highlighted date
-                        // ...
+                        // Unmark the selected date
+                        calendarView.markDate(selectedCalendar, false, true)
                     }
                 }
             },
@@ -159,6 +215,7 @@ class MainActivity : BasisActivity() {
             set(currentYear, currentMonth, currentDay)
         }.timeInMillis
     }
+
 
 
 

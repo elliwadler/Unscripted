@@ -4,7 +4,7 @@
     <string name="day_greeting">Guten Tag!</string>
     <string name="evening_greeting">Guten Abend</string>
     <string name="night_greeting">Gute Nacht</string>
-    <string name="recent">Letzte Einträge:</string>
+    <string name="recent">Einträge:</string>
     <string name="all"><u>Alle Ansehen</u></string>
     <string name="add">Hinzufügen</string>
     <!--LOGIN Screen-->
