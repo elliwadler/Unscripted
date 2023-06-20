@@ -11,7 +11,7 @@ class Entry(
     var userId: String? = "",
     var title: String? = "",
     var date: Date? = Date(),
-    var time: String? = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time),
+    var time: String? = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Calendar.getInstance().time),
     var imagePaths: MutableList<String> = mutableListOf(),
     var text: String? = "",
     var mood: Int? = -1,

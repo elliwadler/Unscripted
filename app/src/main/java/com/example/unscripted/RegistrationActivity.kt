@@ -1,20 +1,14 @@
 package com.example.unscripted
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class RegistrationActivity : BasisActivity() {
 
@@ -24,7 +18,6 @@ class RegistrationActivity : BasisActivity() {
 
         val tvLogin : TextView = findViewById(R.id.tv_register_login)
         tvLogin.setOnClickListener{
-            //startActivity(Intent(this, LoginActivity::class.java))
             onBackPressedDispatcher.onBackPressed()
         }
 
@@ -52,32 +45,32 @@ class RegistrationActivity : BasisActivity() {
         val confirmPassword : String = etConfirmPassword.text.toString().trim{ it <= ' '}
 
         val returnValue = when{
-            firstName.isEmpty() ->{
-                showCustomSnackbar("Please enter first name.", true);
+            TextUtils.isEmpty(firstName) -> {
+                (findViewById<TextInputLayout>(R.id.til_register_firstname)).error = getString(R.string.errormessage_registration_firstName)
                 false
             }
-            lastName.isEmpty() ->{
-                showCustomSnackbar("Please enter last name.", true);
+            TextUtils.isEmpty(lastName) -> {
+                (findViewById<TextInputLayout>(R.id.til_register_lastname)).error = getString(R.string.errormessage_registration_lastName)
                 false
             }
-            email.isEmpty() ->{
-                showCustomSnackbar("Please enter email.", true);
+            TextUtils.isEmpty(email) -> {
+                (findViewById<TextInputLayout>(R.id.til_register_email)).error = getString(R.string.errormessage_registration_email)
                 false
             }
-            password.isEmpty() ->{
-                showCustomSnackbar("Please enter a password.", true);
+            TextUtils.isEmpty(password) -> {
+                (findViewById<TextInputLayout>(R.id.til_register_password)).error = getString(R.string.errormessage_registration_password)
                 false
             }
-            confirmPassword.isEmpty() ->{
-                showCustomSnackbar("Please confirm your password.", true);
+            TextUtils.isEmpty(confirmPassword) -> {
+                (findViewById<TextInputLayout>(R.id.til_register_confirmpassword)).error = getString(R.string.errormessage_registration_confirmpassword)
                 false
             }
             password!=confirmPassword ->{
-                showCustomSnackbar("Password and confirm password does not match.", true);
+                (findViewById<TextInputLayout>(R.id.til_register_confirmpassword)).error = getString(R.string.errormessage_registration_match_confirmpassword)
                 false
             }
             !cbTermsAndCondition.isChecked ->{
-                showCustomSnackbar("Please aggre to the terms and conditions.", true);
+                showCustomSnackbar(getString(R.string.errormessage_registration_terms), true);
                 false
             }
             else -> true

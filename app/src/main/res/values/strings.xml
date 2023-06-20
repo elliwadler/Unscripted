@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name" translatable="false">Unscripted</string>
-    <string name="morning_greeting">Good morning!</string>
-    <string name="day_greeting">Good day!</string>
-    <string name="evening_greeting">Good evening!</string>
-    <string name="night_greeting">Good night!</string>
+    <string name="app_name">Unscripted</string>
+
+    <string name="morning_greeting">Good morning </string>
+    <string name="day_greeting">Good day </string>
+    <string name="evening_greeting">Good evening </string>
+    <string name="night_greeting">Good night </string>
     <string name="recent">Entries:</string>
     <string name="all"><u>See All</u></string>
     <string name="add">Add</string>
@@ -13,6 +14,8 @@
     <string name="et_login_email_hint">Email</string>
     <string name="et_login_password_hint">Password</string>
     <string name="btn_login_login_text">LOGIN</string>
+    <string name="errormessage_login_email">Please enter an email address!</string>
+    <string name="errormessage_login_password">Please enter a password!</string>
     <string name="tv_login_donthaveanaccount_text">Don\'t have an account?</string>
     <string name="tv_login_register_text"><u>Register</u></string>
     <string name="tv_login_forgotpassword_text"><u>Forgot Password?</u></string>
@@ -25,11 +28,22 @@
     <string name="btn_register_register_text">REGISTER</string>
     <string name="tv_register_alreadyhaveanaccount_text">Already have an account?</string>
     <string name="tv_register_login_text"><u>Login</u></string>
+    <string name="infomessage_forgotpassword_emailtoresetsend">Password has been reset.</string>
+    <string name="errormessage_forgotpassword_emailtoresetsend">An error occured.</string>
+    <string name="errormessage_registration_firstName">Please enter a first name.</string>
+    <string name="errormessage_registration_lastName">Please enter a last name.</string>
+    <string name="errormessage_registration_email">Please enter a email.</string>
+    <string name="errormessage_registration_password">Please enter a password</string>
+    <string name="errormessage_registration_confirmpassword">Please confirm your password.</string>
+    <string name="errormessage_registration_match_confirmpassword">Password and confirm password do not match.</string>
+    <string name="errormessage_registration_terms">Please agree to terms and conditions.</string>
+    <string name="til_register_lastname_hint">Lastname</string>
     <!--FORGET PASSWORD Screen-->
     <string name="tv_forgotpassword_title_text">FORGOT PASSWORD</string>
     <string name="tv_forgotpassword_description_text">Please enter your e-mail and we\'ll send you an email to reset your password</string>
     <string name="btn_forgotpassword_submit_text">SUBMIT</string>
     <string name="tv_login_slogan_text">Because life writes the best Scripts</string>
+    <!--NEW Entry Screen-->
     <string name="tv_new_entry_text">NEW ENTRY</string>
     <string name="til_new_entry_title_hint">Title</string>
     <string name="til_text">Text ...</string>
@@ -49,5 +63,6 @@
     <string name="Cloud">Cloudy</string>
     <string name="cloud_sun">Changeable</string>
     <string name="sun">Sunny</string>
-
+    <!--Detail Screen-->
+    <string name="implemented_soon">This feature will be implemented soon!</string>
 </resources>

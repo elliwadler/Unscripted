@@ -17,7 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unscripted.NoActionBar"
         tools:targetApi="31">
-
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Unscripted.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".BasisActivity"
             android:exported="false" />
@@ -25,38 +34,39 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Unscripted.NoActionBar"></activity>
+            android:theme="@style/Theme.Unscripted.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".DetailActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Unscripted.NoActionBar"></activity>
+            android:theme="@style/Theme.Unscripted.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".NewEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Unscripted.NoActionBar"></activity>
+            android:theme="@style/Theme.Unscripted.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Unscripted.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/Theme.Unscripted.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
             android:name=".RegistrationActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Unscripted.NoActionBar"></activity>
+            android:theme="@style/Theme.Unscripted.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Unscripted.NoActionBar"></activity>
+            android:theme="@style/Theme.Unscripted.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 

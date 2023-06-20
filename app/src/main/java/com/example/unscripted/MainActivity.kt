@@ -5,9 +5,12 @@ import EntryAdapter
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.view.View
 import android.widget.CalendarView
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -24,6 +27,7 @@ class MainActivity : BasisActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var search: ImageView
     private lateinit var searchDate: Calendar
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +35,10 @@ class MainActivity : BasisActivity() {
 
         auth = FirebaseAuth.getInstance()
         searchDate = Calendar.getInstance()
+        progressBar = findViewById(R.id.main_progressBar)
 
         setupCalendar()
+        progressBar.visibility = View.VISIBLE
         setupListView(5)
         setupFloatingActionButton()
         setupActionBar()
@@ -45,10 +51,12 @@ class MainActivity : BasisActivity() {
     }
 
     private fun show_all_Entries() {
+        progressBar.visibility = View.VISIBLE
         setupListView(null)
         val listView: ListView = findViewById(R.id.list_recent_entries)
         val adapter = EntryAdapter(this, dataList)
         listView.adapter = adapter
+        progressBar.visibility = View.GONE
 
     }
 
@@ -94,17 +102,12 @@ class MainActivity : BasisActivity() {
             actionBar.setHomeAsUpIndicator(R.drawable.logout)
         }
         toolbarRegistrationActivity.setNavigationOnClickListener{
-            auth.signOut()
-            navigateToLoginScreen()
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
-    private fun navigateToLoginScreen() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)
-        finish()
-    }
 
     override fun onStart() {
         super.onStart()
@@ -138,10 +141,10 @@ class MainActivity : BasisActivity() {
                 val layoutParams = listView.layoutParams
                 layoutParams.height = heightPx
                 listView.layoutParams = layoutParams
-
                 val adapter = EntryAdapter(this, dataList)
                 listView.adapter = adapter
 
+                progressBar.visibility = View.GONE
                 val gson = Gson()
 
                 listView.setOnItemClickListener { parent, view, position, id ->
@@ -168,44 +171,6 @@ class MainActivity : BasisActivity() {
 
     private fun setupCalendar() {
         val calendarView: CalendarView = findViewById(R.id.calendar_1)
-
-        val cloudFirestore = CloudFirestore()
-        val currentUserID = cloudFirestore.getCurrentUserID()
-
-        cloudFirestore.getAllEntries(
-            onSuccess = { retrievedDataList ->
-                val entryDates = retrievedDataList.filter { entry -> entry.userId == currentUserID }
-                    .map { entry -> entry.date }
-                    .distinct()
-
-                calendarView.setOnDateChangeListener { _, year, month, day ->
-                    val selectedCalendar = Calendar.getInstance().apply {
-                        set(year, month, day)
-                    }
-
-                    val selectedDateInMillis = selectedCalendar.timeInMillis
-
-                    if (entryDates.any { entryDate ->
-                            val entryCalendar = Calendar.getInstance().apply {
-                                timeInMillis = entryDate!!.time
-                            }
-                            entryCalendar.get(Calendar.YEAR) == year &&
-                                    entryCalendar.get(Calendar.MONTH) == month &&
-                                    entryCalendar.get(Calendar.DAY_OF_MONTH) == day
-                        }) {
-                        // Mark the selected date
-                        calendarView.entry
-                    } else {
-                        // Unmark the selected date
-                        calendarView.markDate(selectedCalendar, false, true)
-                    }
-                }
-            },
-            onFailure = { exception ->
-                showCustomSnackbar(exception!!.toString(), true)
-            }
-        )
-
         val currentDate = LocalDate.now()
         val currentYear: Int = currentDate.year
         val currentMonth: Int = currentDate.monthValue - 1 // Months are zero-based in CalendarView
@@ -221,12 +186,19 @@ class MainActivity : BasisActivity() {
 
     private fun getGreetingBasedOnTime(): String {
         val calendar = Calendar.getInstance()
+        var name:String = ""
+
+        val loggedInUser = this.getSharedPreferences(Constant.PREFERENCES, MODE_PRIVATE)
+            .getString(Constant.USERNAME_OF_LOGGED_USER, "")
+        if(!TextUtils.isEmpty(loggedInUser)){
+            name =  loggedInUser!!
+        }
 
         return when (calendar.get(Calendar.HOUR_OF_DAY)) {
-            in 0..11 -> getString(R.string.morning_greeting)
-            in 12..16 -> getString(R.string.day_greeting)
-            in 17..20 -> getString(R.string.evening_greeting)
-            else -> getString(R.string.night_greeting)
+            in 0..11 -> getString(R.string.morning_greeting)+name+"!"
+            in 12..16 -> getString(R.string.day_greeting)+name+"!"
+            in 17..20 -> getString(R.string.evening_greeting)+name+"!"
+            else -> getString(R.string.night_greeting)+name+"!"
         }
     }
 }

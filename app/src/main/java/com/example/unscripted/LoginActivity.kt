@@ -1,83 +1,74 @@
 package com.example.unscripted
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 
 class LoginActivity : BasisActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.unscripted.R.layout.activity_login)
+        setContentView(R.layout.activity_login)
 
-        val tv_register = findViewById<TextView>(com.example.unscripted.R.id.tv_login_register)
-        tv_register.setOnClickListener {
-            val intent = Intent(this, RegistrationActivity::class.java)
-            startActivity(intent)
+        val tvRegister = findViewById<TextView>(R.id.tv_login_register)
+        tvRegister.setOnClickListener {
+            startActivity(Intent(this, RegistrationActivity::class.java))
         }
 
-        val tv_forgot_pw = findViewById<TextView>(com.example.unscripted.R.id.tv_login_forgotpassword)
-        tv_forgot_pw.setOnClickListener {
-            val intent = Intent(this, ForgotPasswordActivity::class.java)
-            startActivity(intent)
+        val tvForgotPw = findViewById<TextView>(R.id.tv_login_forgotpassword)
+        tvForgotPw.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
-        val btn_login = findViewById<Button>(com.example.unscripted.R.id.btn_login_login)
-        btn_login.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+        val btnLogin = findViewById<Button>(R.id.btn_login_login)
+        btnLogin.setOnClickListener {
             loginUser()
         }
     }
 
-    fun loginUser(){
-        val etMail : EditText = findViewById(com.example.unscripted.R.id.et_login_email)
-        val etPassword : EditText = findViewById(com.example.unscripted.R.id.et_login_password)
+    private fun loginUser(){
+        val emailID : String = (findViewById<EditText>(R.id.et_login_email)).text.toString().trim{ it <= ' '}
+        val password : String = (findViewById<EditText>(R.id.et_login_password)).text.toString().trim{ it <= ' '}
 
-        val email = etMail.text.toString().trim{ it <= ' '}
-        val password = etPassword.text.toString().trim{ it <= ' '}
-
-        if(validateLoginInformation(email, password)){
+        if(validateLoginInformation(emailID, password)){
             FirebaseAuth
                 .getInstance()
-                .signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener  { task ->
-                    if (task.isSuccessful) {
-                        showCustomSnackbar("You are logged in", false)
-
+                .signInWithEmailAndPassword(emailID, password)
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful){
                         CloudFirestore().getUserDetails(this)
-
                     } else {
-                        showCustomSnackbar(task.exception!!.toString(), false)
+                        showCustomSnackbar(task.exception!!.message.toString(), true);
                     }
                 }
         }
     }
 
-    private fun validateLoginInformation(email:String, password:String): Boolean {
+    private fun validateLoginInformation(emailID:String, password:String) : Boolean{
         return when {
-                email.isEmpty() ->{
-                    showCustomSnackbar("Please enter email.", true);
-                    false
-                }
-                password.isEmpty() ->{
-                    showCustomSnackbar("Please enter a password.", true);
-                    false
-                }
+            TextUtils.isEmpty(emailID) -> {
+                (findViewById<TextInputLayout>(R.id.til_login_email)).error = getString(R.string.errormessage_login_email)
+                false
+            }
+
+            TextUtils.isEmpty(password) -> {
+                (findViewById<TextInputLayout>(R.id.til_login_password)).error = getString(R.string.errormessage_login_password)
+                false
+            }
+
             else -> true
         }
     }
 
-    fun userLoggedInSuccess(user: User) {
+    fun userLoggedInSuccess(user : User){
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("user", user)
         startActivity(intent)
+        finish()
     }
 }

@@ -9,6 +9,7 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -96,9 +97,11 @@ class NewEntryActivity : BasisActivity() {
     }
 
     private fun checkPermission() {
-        if (ContextCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(
+                this,
                 Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED) {
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             // Permission already granted, start image selection
             pickImageFromGallery()
         } else {
@@ -108,6 +111,22 @@ class NewEntryActivity : BasisActivity() {
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 GALLERY_PERMISSION_REQUEST_CODE
             )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == GALLERY_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, start image selection
+                pickImageFromGallery()
+            } else {
+                // Permission denied, handle accordingly (e.g., show a message or disable the functionality)
+            }
         }
     }
 
@@ -172,7 +191,7 @@ class NewEntryActivity : BasisActivity() {
         val weatherIconNumber: Int = getSelectedWeatherIconNumber()
 
         val returnValue = when {
-            title.isEmpty() -> {
+            TextUtils.isEmpty(title) -> {
                 showCustomSnackbar("Please enter a title.", true)
                 false
             }
@@ -255,6 +274,7 @@ class NewEntryActivity : BasisActivity() {
         val pickImg = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         changeImage.launch(pickImg)
     }
+
 
     private val changeImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {

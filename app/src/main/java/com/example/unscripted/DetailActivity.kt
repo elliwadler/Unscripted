@@ -4,9 +4,12 @@ import Entry
 import android.app.AlertDialog
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,6 +24,7 @@ import java.util.Locale
 class DetailActivity : BasisActivity() {
     private lateinit var storageRef: StorageReference
     private lateinit var db: FirebaseFirestore
+    private lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -28,6 +32,7 @@ class DetailActivity : BasisActivity() {
         val storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
         db = FirebaseFirestore.getInstance()
+        progressBar = findViewById(R.id.progressBar)
 
         setupActionBar()
         displayData()
@@ -36,8 +41,16 @@ class DetailActivity : BasisActivity() {
         btnDelete.setOnClickListener {
            deleteAction()
         }
+
+        val btnEdit: FloatingActionButton = findViewById(R.id.fabEdit)
+        btnEdit.setOnClickListener {
+            showToastMessage(getString(R.string.implemented_soon))
+        }
     }
 
+    private fun showToastMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
     private fun deleteAction() {
         val selectedItem = intent.getParcelableExtra<Entry>("selectedItem")
 
@@ -114,7 +127,9 @@ class DetailActivity : BasisActivity() {
         val llPhotos: LinearLayout = findViewById(R.id.ll_photos)
         val imageUris: MutableList<String> = selectedItem?.imagePaths!!
 
+        progressBar.visibility = View.VISIBLE
         retrieveImagesForEntry(selectedItem?.id!!)
+        progressBar.visibility = View.GONE
     }
 
     private fun retrieveImagesForEntry(entryId: String) {
@@ -139,7 +154,9 @@ class DetailActivity : BasisActivity() {
 
                             Glide.with(this).load(imageUrl).into(imageView)
 
+                            progressBar.visibility = View.GONE
                             linearLayout.addView(imageView, layoutParams)
+
                         }
                         .addOnFailureListener {
                             showCustomSnackbar("Can not load image.", true)

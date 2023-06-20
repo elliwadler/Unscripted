@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="morning_greeting">Guten Morgen!</string>
-    <string name="day_greeting">Guten Tag!</string>
-    <string name="evening_greeting">Guten Abend</string>
-    <string name="night_greeting">Gute Nacht</string>
+    <string name="morning_greeting">Guten Morgen </string>
+    <string name="day_greeting">Guten Tag </string>
+    <string name="evening_greeting">Guten Abend </string>
+    <string name="night_greeting">Gute Nacht </string>
     <string name="recent">Einträge:</string>
     <string name="all"><u>Alle Ansehen</u></string>
     <string name="add">Hinzufügen</string>
@@ -50,4 +50,17 @@
     <string name="Cloud">Bewölkt</string>
     <string name="cloud_sun">Wechselhaft</string>
     <string name="sun">Sonnig</string>
+    <string name="errormessage_login_email">Bitte geben Sie eine E-Mail Adresse ein!</string>
+    <string name="errormessage_login_password">Bitte geben sie ein Passwort ein!</string>
+    <string name="infomessage_forgotpassword_emailtoresetsend">Passwort wurde zurückgesetzt.</string>
+    <string name="errormessage_forgotpassword_emailtoresetsend">Ein Fehler ist aufgetreten.</string>
+    <string name="errormessage_registration_firstName">Bitte geben Sie einen Vornamen ein.</string>
+    <string name="errormessage_registration_lastName">Bitte geben Sie einen Nachnamen ein.</string>
+    <string name="errormessage_registration_email">Bitte geben Sie eine E-mail ein.</string>
+    <string name="errormessage_registration_password">Bitte geben Sie ein Passwort ein.</string>
+    <string name="errormessage_registration_confirmpassword">Bitte bestätigen Sie ihr Passwort.</string>
+    <string name="errormessage_registration_match_confirmpassword">Passwort und Passwortbestätigung stimmen nicht überein.</string>
+    <string name="errormessage_registration_terms">Bitte stimmen sie den Allgemeinen Geschäftsbedingungen zu.</string>
+    <string name="til_register_lastname_hint">Nachname</string>
+    <string name="implemented_soon">Diese Erweiterung wird bald implementiert!</string>
 </resources>

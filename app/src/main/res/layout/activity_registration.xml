@@ -14,7 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <TextView
             android:id="@+id/tv_register_title"
             android:layout_width="match_parent"
@@ -25,9 +24,8 @@
             android:textSize="@dimen/tv_20sp_textsize" />
     </androidx.appcompat.widget.Toolbar>
 
-
     <ScrollView
-        android:id="@+id/sv_register_svcontent"
+        android:id="@+id/sv_register_maincontent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +41,8 @@
                 android:id="@+id/til_register_firstname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_margin="@dimen/et_16dp_margin"
-                android:hint="@string/til_register_firstname_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -54,17 +52,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:hint="@string/til_register_firstname_hint"
                     android:padding="@dimen/et_16dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"/>
-
+                    android:textSize="@dimen/et_16sp_textsize"
+                    android:autofillHints="name"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_register_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/et_16dp_margin"
-                android:hint="@string/til_lastname_hint"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="16dp"
+                android:hint="@string/til_register_lastname_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_register_firstname">
@@ -75,14 +75,16 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:padding="@dimen/et_16dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"/>
+                    android:textSize="@dimen/et_16sp_textsize"
+                    android:autofillHints="name"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_register_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/et_16dp_margin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="16dp"
                 android:hint="@string/et_login_email_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,14 +96,16 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/et_16dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"/>
+                    android:textSize="@dimen/et_16sp_textsize"
+                    android:autofillHints="emailAddress"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_register_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/et_16dp_margin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="16dp"
                 android:hint="@string/et_login_password_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,14 +117,16 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:padding="@dimen/et_16dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"/>
+                    android:textSize="@dimen/et_16sp_textsize"
+                    android:autofillHints="password"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_register_confirmpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/et_16dp_margin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="16dp"
                 android:hint="@string/til_register_confirmpassword_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,14 +138,15 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:padding="@dimen/et_16dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"/>
+                    android:textSize="@dimen/et_16sp_textsize"
+                    android:autofillHints="password"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/cb_register_termsandcondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_16dp_margin"
+                android:layout_marginTop="16dp"
                 android:checked="false"
                 android:text="@string/cb_register_termsandcondition_text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,14 +157,13 @@
                 android:id="@+id/btn_register_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/et_16dp_margin"
-                android:layout_marginTop="@dimen/et_32dp_margin"
-                android:layout_marginEnd="@dimen/et_16dp_margin"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
                 android:padding="@dimen/btn_8dp_padding"
                 android:text="@string/btn_register_register_text"
                 android:textSize="@dimen/btn_18sp_textsize"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/pinkish_red"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cb_register_termsandcondition" />
 
@@ -165,7 +171,7 @@
                 android:id="@+id/ll_register_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_32dp_margin"
+                android:layout_marginTop="32dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -187,6 +193,7 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/tv_16sp_textsize"/>
             </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

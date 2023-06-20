@@ -5,6 +5,7 @@
     <color name="darkgrey">#535353</color>
     <color name="white">#FFFFFFFF</color>
     <color name="pinkish_red">#F7A1B1</color>
+    <color name="pinkish_red_darker">#F4859A</color>
     <color name="purply_blue">#BFBCF6</color>
     <color name="purply_blue_light">#D6D4F8</color>
     <color name="green_cyan">#8ac1aa</color>

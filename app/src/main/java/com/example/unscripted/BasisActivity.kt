@@ -1,7 +1,7 @@
 package com.example.unscripted
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 
@@ -15,7 +15,7 @@ open class BasisActivity : AppCompatActivity() {
         val snackbar : Snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT)
 
         if(errorMessage){
-            snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.reddish_orange))
+            snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         } else {
             snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
         }
