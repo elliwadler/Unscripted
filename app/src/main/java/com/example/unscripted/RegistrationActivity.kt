@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -21,7 +20,6 @@ class RegistrationActivity : BasisActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        setupActionBar()
 
         val btnRegister : Button = findViewById(R.id.btn_register_register)
         btnRegister.setOnClickListener {
@@ -107,20 +105,6 @@ class RegistrationActivity : BasisActivity() {
         }
     }
 
-    private fun setupActionBar(){
-        val toolbarRegistrationActivity : Toolbar = findViewById(R.id.toolbar_register_activity)
-        setSupportActionBar(toolbarRegistrationActivity)
-
-        val actionBar = supportActionBar
-        if(actionBar != null){
-            //This will make own action clickable and the "<-" at the left side
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.arrow_back)
-        }
-        toolbarRegistrationActivity.setNavigationOnClickListener{
-            onBackPressedDispatcher.onBackPressed()
-        }
-    }
 
     fun userRegistrationSuccess() {
         onBackPressedDispatcher.onBackPressed()

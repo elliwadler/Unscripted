@@ -25,7 +25,7 @@ class CloudFirestore {
             }
     }
 
-    fun saveEntryInfoOnCloudFirestore(newEntryActivity: NewEntryActivity, newEntry: Entry) {
+    fun saveEntryInfoOnCloudFirestore(newEntryActivity: com.example.unscripted.NewEntryActivity, newEntry: Entry) {
         newEntry.userId = getCurrentUserID() // Set the user ID as a field in the Entry object
 
         firestoreInstance.collection(Constant.TABLENAME_ENTRY)

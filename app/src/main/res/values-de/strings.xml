@@ -62,5 +62,11 @@
     <string name="errormessage_registration_match_confirmpassword">Passwort und Passwortbestätigung stimmen nicht überein.</string>
     <string name="errormessage_registration_terms">Bitte stimmen sie den Allgemeinen Geschäftsbedingungen zu.</string>
     <string name="til_register_lastname_hint">Nachname</string>
+    <!--Detail-->
     <string name="implemented_soon">Diese Erweiterung wird bald implementiert!</string>
+    <string name="deleted">Eintrag gelöscht!</string>
+    <string name="cant_load_img">Bild kann nicht geladen werden!</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="delete_question">Sind Sie sich sicher, dass sie diesen Eintrag löschen wollen?</string>
+    <string name="delete_entry">Eintrag löschen</string>
 </resources>

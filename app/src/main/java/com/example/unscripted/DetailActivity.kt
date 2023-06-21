@@ -10,8 +10,8 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -19,12 +19,11 @@ import com.google.firebase.storage.StorageReference
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-
-
 class DetailActivity : BasisActivity() {
     private lateinit var storageRef: StorageReference
     private lateinit var db: FirebaseFirestore
     private lateinit var progressBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -34,12 +33,11 @@ class DetailActivity : BasisActivity() {
         db = FirebaseFirestore.getInstance()
         progressBar = findViewById(R.id.progressBar)
 
-        setupActionBar()
         displayData()
 
         val btnDelete: FloatingActionButton = findViewById(R.id.fabDelete)
         btnDelete.setOnClickListener {
-           deleteAction()
+            deleteAction()
         }
 
         val btnEdit: FloatingActionButton = findViewById(R.id.fabEdit)
@@ -51,17 +49,18 @@ class DetailActivity : BasisActivity() {
     private fun showToastMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
     private fun deleteAction() {
         val selectedItem = intent.getParcelableExtra<Entry>("selectedItem")
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Delete Entry")
-            .setMessage("Are you sure you want to delete this entry?")
+            .setTitle(getString(R.string.delete_entry))
+            .setMessage(getString(R.string.delete_question))
             .setPositiveButton("Delete") { _, _ ->
                 val firestore = CloudFirestore()
                 firestore.deleteEntryCloudFirestore(this, selectedItem!!)
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .create()
 
         dialog.show()
@@ -97,7 +96,7 @@ class DetailActivity : BasisActivity() {
             5 -> getString(R.string.love)
             else -> getString(R.string.neutral)
         }
-        textViewMood.text= textMood.toString()
+        textViewMood.text = textMood.toString()
 
         val textViewClock: TextView = findViewById(R.id.tv_detail_clock)
         textViewClock.text = selectedItem?.time
@@ -122,14 +121,13 @@ class DetailActivity : BasisActivity() {
             5 -> getString(R.string.sun)
             else -> getString(R.string.cloud_sun)
         }
-        textViewWeather.text= textWeather.toString()
+        textViewWeather.text = textWeather.toString()
 
         val llPhotos: LinearLayout = findViewById(R.id.ll_photos)
         val imageUris: MutableList<String> = selectedItem?.imagePaths!!
 
         progressBar.visibility = View.VISIBLE
         retrieveImagesForEntry(selectedItem?.id!!)
-        progressBar.visibility = View.GONE
     }
 
     private fun retrieveImagesForEntry(entryId: String) {
@@ -152,43 +150,35 @@ class DetailActivity : BasisActivity() {
                             layoutParams.setMargins(0, 0, 8.dpToPx(), 0)
                             imageView.layoutParams = layoutParams
 
-                            Glide.with(this).load(imageUrl).into(imageView)
+                            Glide.with(this)
+                                .load(imageUrl)
+                                .transform(CenterCrop())
+                                .into(imageView)
 
-                            progressBar.visibility = View.GONE
+
                             linearLayout.addView(imageView, layoutParams)
-
                         }
                         .addOnFailureListener {
-                            showCustomSnackbar("Can not load image.", true)
+                            showCustomSnackbar(getString(R.string.cant_load_img), true)
                         }
                 }
+
+                progressBar.visibility = View.GONE
             }
             .addOnFailureListener {
-                showCustomSnackbar("Can not load image.", true)
+                showCustomSnackbar(getString(R.string.cant_load_img), true)
+                progressBar.visibility = View.GONE
             }
     }
 
-    fun Int.dpToPx(): Int {
+
+    private fun Int.dpToPx(): Int {
         return (this * Resources.getSystem().displayMetrics.density).toInt()
     }
 
 
-    private fun setupActionBar(){
-        val toolbarNewActivity : Toolbar = findViewById(R.id.toolbar_detail_activity)
-        setSupportActionBar(toolbarNewActivity)
-
-        val actionBar = supportActionBar
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.arrow_back)
-        }
-        toolbarNewActivity.setNavigationOnClickListener{
-            onBackPressedDispatcher.onBackPressed()
-        }
-    }
-
     fun deleteEntrySuccess() {
-        showCustomSnackbar("Entry deleted!",false)
+        showCustomSnackbar(getString(R.string.deleted), false)
         onBackPressedDispatcher.onBackPressed()
     }
 }

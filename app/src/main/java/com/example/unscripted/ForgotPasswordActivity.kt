@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.widget.Toolbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -14,7 +13,6 @@ class ForgotPasswordActivity : BasisActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
 
-        setupActionBar()
 
         val btnSubmit : Button = findViewById(R.id.btn_forgotpassword_submit)
         btnSubmit.setOnClickListener {
@@ -42,19 +40,4 @@ class ForgotPasswordActivity : BasisActivity() {
         }
     }
 
-    private fun setupActionBar(){
-        val toolbarRegistration : Toolbar = findViewById(R.id.toolbar_forgotpassword_toolbar)
-        setSupportActionBar(toolbarRegistration)
-
-        val actionbar = supportActionBar
-        if(actionbar  != null){
-            //actionbar element is clickable + add following icon "<" (default: left)
-            actionbar.setDisplayHomeAsUpEnabled(true)
-            actionbar.setHomeAsUpIndicator(R.drawable.arrow_back)
-        }
-
-        toolbarRegistration.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-    }
 }

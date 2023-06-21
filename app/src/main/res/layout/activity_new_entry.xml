@@ -36,7 +36,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/et_8dp_margin">
 
 
             <TextView
@@ -47,8 +48,10 @@
                 android:layout_marginLeft="@dimen/et_16dp_margin"
                 android:textStyle="bold"
                 android:text="@string/new_entry"
-                android:textSize="@dimen/btn_18sp_textsize"
+                android:textColor="@color/black"
+                android:textSize="@dimen/btn_20sp_textsize"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="MissingConstraints,UnknownId" />
 
             <EditText
@@ -57,12 +60,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/et_32dp_margin"
                 android:hint="What describes today the best?"
+                android:layout_marginLeft="@dimen/et_16dp_margin"
                 android:letterSpacing="0.2"
                 android:textAlignment="viewStart"
-                android:textSize="16sp"
                 android:textStyle="bold"
-                android:maxLength="32"
-                android:layout_marginLeft="@dimen/et_16dp_margin"
+                android:maxLength="25"
+                android:textSize="@dimen/btn_18sp_textsize"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_new_date" />
 
@@ -81,7 +84,7 @@
                 android:lineSpacingExtra="@dimen/m2dp"
                 android:textColor="@color/darkgrey"
                 android:textAlignment="viewStart"
-                android:textSize="@dimen/textsize_14sp"
+                android:textSize="@dimen/btn_18sp_textsize"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +114,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/mood_text"
                     android:padding="@dimen/btn_8dp_padding"
+                    android:textSize="@dimen/btn_18sp_textsize"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"></TextView>
 
@@ -194,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/weather_info"
                     android:padding="@dimen/btn_8dp_padding"
+                    android:textSize="@dimen/btn_18sp_textsize"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"></TextView>
 
@@ -302,6 +307,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_margin="@dimen/margin_45dp"
+        app:backgroundTint="@color/blue"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
         app:srcCompat="@drawable/image"
         app:layout_constraintBottom_toBottomOf="parent"

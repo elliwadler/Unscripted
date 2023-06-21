@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
@@ -93,15 +92,9 @@ class MainActivity : BasisActivity() {
 
 
     private fun setupActionBar(){
-        val toolbarRegistrationActivity : Toolbar = findViewById(R.id.toolbar_main_activity)
-        setSupportActionBar(toolbarRegistrationActivity)
+        val iv_logout:ImageView = findViewById(R.id.iv_logout)
 
-        val actionBar = supportActionBar
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.logout)
-        }
-        toolbarRegistrationActivity.setNavigationOnClickListener{
+        iv_logout.setOnClickListener(){
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()

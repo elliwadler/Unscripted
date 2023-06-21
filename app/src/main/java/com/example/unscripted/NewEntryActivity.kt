@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,7 +16,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -51,8 +51,6 @@ class NewEntryActivity : BasisActivity() {
         val storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
         db = FirebaseFirestore.getInstance()
-
-        setupActionBar()
 
         this.entryId = UUID.randomUUID().toString()
 
@@ -120,12 +118,14 @@ class NewEntryActivity : BasisActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        handlePermissionsResult(requestCode, grantResults)
+    }
+
+
+    private fun handlePermissionsResult(requestCode: Int, grantResults: IntArray) {
         if (requestCode == GALLERY_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, start image selection
                 pickImageFromGallery()
-            } else {
-                // Permission denied, handle accordingly (e.g., show a message or disable the functionality)
             }
         }
     }
@@ -281,6 +281,16 @@ class NewEntryActivity : BasisActivity() {
             val data = result.data
             val imgUri = data?.data
 
+            // Load the selected image into a Bitmap
+            val inputStream = contentResolver.openInputStream(imgUri!!)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+
+            // Crop the rotated image to a square (1:1) ratio
+            val imageEditing = ImageEditing()
+            val croppedBitmap = imageEditing.cropToSquare(bitmap)
+
+
+
             val linearLayout: LinearLayout = findViewById(R.id.ll_photos)
 
             val imageView = ImageView(this)
@@ -290,61 +300,47 @@ class NewEntryActivity : BasisActivity() {
             layoutParams.setMargins(0, 0, 8.dpToPx(), 0)
             imageView.layoutParams = layoutParams
 
-            imageView.setImageURI(imgUri)
+            //imageView.setImageURI(imgUri)
+            imageView.setImageBitmap(croppedBitmap)
 
             linearLayout.addView(imageView, layoutParams)
 
-            imageUris.add((imgUri!!))
+            imageUris.add(imgUri)
         }
     }
-
 
 
     fun Int.dpToPx(): Int {
         return (this * Resources.getSystem().displayMetrics.density).toInt()
     }
 
-    private fun setupActionBar(){
-        val toolbarRegistrationActivity : Toolbar = findViewById(R.id.toolbar_new_activity)
-        setSupportActionBar(toolbarRegistrationActivity)
 
-        val actionBar = supportActionBar
-        if(actionBar != null){
-            //This will make own action clickable and the "<-" at the left side
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.arrow_back)
+    private fun uploadImages() {
+        val entryId = this.entryId
+
+        if (entryId == null) {
+            // Entry ID not available, handle the error scenario
+            return
         }
-        toolbarRegistrationActivity.setNavigationOnClickListener{
-            onBackPressedDispatcher.onBackPressed()
+
+        for (imageUri in imageUris) {
+            val imageId = UUID.randomUUID().toString()
+            val fileName = "$entryId/$imageId.jpg"
+            val uploadRef = storageRef.child("images/$fileName")
+
+            // Upload each image to Firebase Storage
+            val uploadTask = uploadRef.putFile(imageUri)
+
+            uploadTask.addOnSuccessListener { taskSnapshot ->
+                val imageUrl = taskSnapshot.metadata?.reference?.downloadUrl.toString()
+
+                // Save the image URL to Firestore
+                saveImageInfo(entryId, imageId, imageUrl)
+            }.addOnFailureListener { exception ->
+                // Handle the failure scenario
+            }
         }
     }
-
-  private fun uploadImages() {
-      val entryId = this.entryId
-
-      if (entryId == null) {
-          // Entry ID not available, handle the error scenario
-          return
-      }
-
-      for (imageUri in imageUris) {
-          val imageId = UUID.randomUUID().toString()
-          val fileName = "$entryId/$imageId.jpg"
-          val uploadRef = storageRef.child("images/$fileName")
-
-          // Upload each image to Firebase Storage
-          val uploadTask = uploadRef.putFile(imageUri)
-
-          uploadTask.addOnSuccessListener { taskSnapshot ->
-              val imageUrl = taskSnapshot.metadata?.reference?.downloadUrl.toString()
-
-              // Save the image URL to Firestore
-              saveImageInfo(entryId, imageId, imageUrl)
-          }.addOnFailureListener { exception ->
-              // Handle the failure scenario
-          }
-      }
-  }
 
     private fun saveImageInfo(entryId: String, imageId: String, imageUrl: String) {
         val imagesCollectionRef = db.collection("entries").document(entryId)
