@@ -1,36 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btn_18sp_textsize">18dp</dimen>
-    <dimen name="btn_8dp_padding">8dp</dimen>
-    <dimen name="et_16sp_textsize">16sp</dimen>
-    <dimen name="tv_forgotpassword_18sp_description_textsize">18sp</dimen>
-    <dimen name="tv_20sp_textsize">20sp</dimen>
-    <dimen name="tv_16sp_textsize">16sp</dimen>
-    <dimen name="tv_5dp_padding">5dp</dimen>
-    <dimen name="et_16dp_padding">16dp</dimen>
-    <dimen name="iv_header_200dp">200dp</dimen>
-    <dimen name="et_16dp_margin">16dp</dimen>
-    <dimen name="et_64dp_margin">64dp</dimen>
-    <dimen name="et_32dp_margin">32dp</dimen>
-    <dimen name="btn_32p_textsize">32sp</dimen>
-    <dimen name="btn_32sp_textsize">32sp</dimen>
-    <dimen name="btn_30sp_textsize">30sp</dimen>
-    <dimen name="et_5dp_margin">5dp</dimen>
-    <dimen name="et_20dp_margin">20dp</dimen>
-    <dimen name="btn_24sp_textsize">24sp</dimen>
-    <dimen name="et_40dp_margin">40dp</dimen>
-    <dimen name="et_150dp">150dp</dimen>
-    <dimen name="et_8dp_margin">8dp</dimen>
-    <dimen name="btn_3dp_padding">3dp</dimen>
-    <dimen name="btn_20sp_textsize">20sp</dimen>
-    <dimen name="et_50dp_margin">50dp</dimen>
-    <dimen name="stroke_1dp">1dp</dimen>
-    <dimen name="m2dp">2dp</dimen>
-    <dimen name="margin_45dp">45dp</dimen>
-    <dimen name="sb_0dp">0dp</dimen>
-    <dimen name="Im_40dp">40dp</dimen>
+    <!--Font-->
     <dimen name="textsize_14sp">14sp</dimen>
-    <dimen name="iv_30dp_margin">30dp</dimen>
-    <dimen name="et_100dp_width">100dp</dimen>
-    <dimen name="et_100dp_height">100dp</dimen>
+    <dimen name="textsize_16sp">16sp</dimen>
+    <dimen name="textsize_18sp">18sp</dimen>
+    <dimen name="textsize_20sp">20sp</dimen>
+    <dimen name="textsize_24sp">24sp</dimen>
+    <dimen name="textsize_32sp">32sp</dimen>
+    <!--dp-->
+    <dimen name="D0dp">0dp</dimen>
+    <dimen name="D1dp">1dp</dimen>
+    <dimen name="D2dp">2dp</dimen>
+    <dimen name="D3dp">3dp</dimen>
+    <dimen name="D5dp">5dp</dimen>
+    <dimen name="D8dp">8dp</dimen>
+    <dimen name="D16dp">16dp</dimen>
+    <dimen name="D20dp">20dp</dimen>
+    <dimen name="D32dp">32dp</dimen>
+    <dimen name="D40dp">40dp</dimen>
+    <dimen name="D50dp">50dp</dimen>
+    <dimen name="D64dp">64dp</dimen>
+    <dimen name="D100dp">100dp</dimen>
+    <dimen name="D150dp">150dp</dimen>
+    <dimen name="D200dp">200dp</dimen>
 </resources>

@@ -1,3 +1,6 @@
+// User class
+// last updated 17.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import android.os.Parcel
@@ -5,9 +8,9 @@ import android.os.Parcelable
 
 class User(
     val id:String? ="",
-    val firstName:String? = "",
-    val lastName:String? = "",
-    val email:String? = ""
+    private val firstName:String? = "",
+    private val lastName:String? = "",
+    private val email:String? = ""
 ) :Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString(),

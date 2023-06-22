@@ -1,3 +1,6 @@
+// First Activity after Login
+// last updated 22.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import Entry
@@ -5,7 +8,6 @@ import EntryAdapter
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.widget.CalendarView
 import android.widget.ImageView
@@ -14,7 +16,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.gson.Gson
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Calendar
@@ -63,11 +64,11 @@ class MainActivity : BasisActivity() {
     private fun setupSearchView() {
         search= findViewById(R.id.main_search)
         search.setOnClickListener{
-            performSearch(null)
+            performSearch()
         }
     }
 
-    private fun performSearch(query: String?) {
+    private fun performSearch() {
         val year = searchDate.get(Calendar.YEAR)
         val month = searchDate.get(Calendar.MONTH)
         val day = searchDate.get(Calendar.DAY_OF_MONTH)
@@ -138,9 +139,8 @@ class MainActivity : BasisActivity() {
                 listView.adapter = adapter
 
                 progressBar.visibility = View.GONE
-                val gson = Gson()
 
-                listView.setOnItemClickListener { parent, view, position, id ->
+                listView.setOnItemClickListener { _, _, position, _ ->
                     val selectedItem: Entry = dataList[position]
                     val intent = Intent(this, DetailActivity::class.java)
                     intent.putExtra("selectedItem", selectedItem)
@@ -148,7 +148,7 @@ class MainActivity : BasisActivity() {
                 }
             },
             onFailure = { exception ->
-                showCustomSnackbar(exception!!.toString(), true)
+                showCustomSnackbar(exception.toString(), true)
             }
         )
     }
@@ -156,7 +156,7 @@ class MainActivity : BasisActivity() {
 
     private fun setupFloatingActionButton() {
         val fabAdd: FloatingActionButton = findViewById(R.id.fabAdd)
-        fabAdd.setOnClickListener { item ->
+        fabAdd.setOnClickListener {
             val intent = Intent(this, NewEntryActivity::class.java)
             startActivity(intent)
         }
@@ -179,19 +179,12 @@ class MainActivity : BasisActivity() {
 
     private fun getGreetingBasedOnTime(): String {
         val calendar = Calendar.getInstance()
-        var name:String = ""
-
-        val loggedInUser = this.getSharedPreferences(Constant.PREFERENCES, MODE_PRIVATE)
-            .getString(Constant.USERNAME_OF_LOGGED_USER, "")
-        if(!TextUtils.isEmpty(loggedInUser)){
-            name =  loggedInUser!!
-        }
 
         return when (calendar.get(Calendar.HOUR_OF_DAY)) {
-            in 0..11 -> getString(R.string.morning_greeting)+name+"!"
-            in 12..16 -> getString(R.string.day_greeting)+name+"!"
-            in 17..20 -> getString(R.string.evening_greeting)+name+"!"
-            else -> getString(R.string.night_greeting)+name+"!"
+            in 0..11 -> getString(R.string.morning_greeting)
+            in 12..16 -> getString(R.string.day_greeting)
+            in 17..20 -> getString(R.string.evening_greeting)
+            else -> getString(R.string.night_greeting)
         }
     }
 }

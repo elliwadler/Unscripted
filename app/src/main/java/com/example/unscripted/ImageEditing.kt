@@ -1,3 +1,6 @@
+// crop Image to Square
+// last updated 21.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import android.graphics.Bitmap

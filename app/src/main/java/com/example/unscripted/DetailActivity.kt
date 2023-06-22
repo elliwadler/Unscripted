@@ -1,3 +1,6 @@
+// Load Detail of selected Entry
+// last updated 22.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import Entry
@@ -144,7 +147,7 @@ class DetailActivity : BasisActivity() {
                             val imageUrl = downloadUrl.toString()
 
                             val imageView = ImageView(this)
-                            val sizeInPx = 100.dpToPx()
+                            val sizeInPx = 200.dpToPx()
 
                             val layoutParams = LinearLayout.LayoutParams(sizeInPx, sizeInPx)
                             layoutParams.setMargins(0, 0, 8.dpToPx(), 0)

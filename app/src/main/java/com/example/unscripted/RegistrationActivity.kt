@@ -1,3 +1,6 @@
+// Registration functionality
+// last updated 17.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import android.os.Bundle

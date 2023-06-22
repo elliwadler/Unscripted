@@ -20,10 +20,10 @@
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:background="@color/pinkish_red"
-            android:paddingLeft="@dimen/et_100dp_height"
-            android:paddingRight="@dimen/et_100dp_height"
-            android:paddingTop="@dimen/et_32dp_margin"
-            android:paddingBottom="@dimen/et_32dp_margin"
+            android:paddingLeft="@dimen/D100dp"
+            android:paddingRight="@dimen/D100dp"
+            android:paddingTop="@dimen/D32dp"
+            android:paddingBottom="@dimen/D32dp"
             android:src="@drawable/unscriptedtext"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,9 +38,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_login_fhj_logo"
-            android:layout_marginTop="@dimen/et_32dp_margin"
+            android:layout_marginTop="@dimen/D32dp"
             android:gravity="center"
-            android:textSize="@dimen/btn_20sp_textsize"/>
+            android:textSize="@dimen/textsize_20sp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_login_email"
@@ -49,7 +49,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_login_title"
-            android:layout_margin="@dimen/et_16dp_margin"
+            android:layout_margin="@dimen/D16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/baseline_email_24">
@@ -59,9 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/et_login_email_hint"
-                android:padding="@dimen/et_16dp_padding"
+                android:padding="@dimen/D16dp"
                 android:inputType="textEmailAddress"
-                android:textSize="@dimen/et_16sp_textsize"
+                android:textSize="@dimen/textsize_16sp"
                 android:autofillHints="emailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_login_email"
-            android:layout_margin="@dimen/et_16dp_margin"
+            android:layout_margin="@dimen/D16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:endIconMode="password_toggle"
             app:startIconDrawable="@drawable/baseline_lock_24">
@@ -84,8 +84,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/et_login_password_hint"
                 android:inputType="textPassword"
-                android:padding="@dimen/et_16dp_padding"
-                android:textSize="@dimen/et_16sp_textsize"
+                android:padding="@dimen/D16dp"
+                android:textSize="@dimen/textsize_16sp"
                 android:autofillHints="password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,10 +93,10 @@
             android:id="@+id/btn_login_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/et_16dp_margin"
-            android:padding="@dimen/btn_8dp_padding"
+            android:layout_margin="@dimen/D16dp"
+            android:padding="@dimen/D8dp"
             android:text="@string/btn_login_login_text"
-            android:textSize="@dimen/btn_18sp_textsize"
+            android:textSize="@dimen/textsize_18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_login_password"/>
@@ -109,15 +109,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_login_login"
-            android:layout_marginTop="@dimen/et_64dp_margin">
+            android:layout_marginTop="@dimen/D64dp">
 
             <TextView
                 android:id="@+id/tv_login_donthaveanaccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_login_donthaveanaccount_text"
-                android:textSize="@dimen/et_16sp_textsize"
-                android:padding="@dimen/et_5dp_margin"/>
+                android:textSize="@dimen/textsize_16sp"
+                android:padding="@dimen/D5dp"/>
 
             <TextView
                 android:id="@+id/tv_login_register"
@@ -125,8 +125,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv_login_register_text"
                 android:textStyle="bold"
-                android:textSize="@dimen/et_16sp_textsize"
-                android:padding="@dimen/et_5dp_margin"/>
+                android:textSize="@dimen/textsize_16sp"
+                android:padding="@dimen/D5dp"/>
         </LinearLayout>
 
         <TextView

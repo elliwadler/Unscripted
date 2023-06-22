@@ -1,4 +1,6 @@
-
+// Adapter for ListView
+// last updated 22.06.2023
+// Author Elisabeth Wadler
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

@@ -1,3 +1,6 @@
+// Firebase Accesses
+// last updated 22.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import Entry
@@ -5,16 +8,13 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 
 class CloudFirestore {
 
-    private val firestoreInstance = FirebaseFirestore.getInstance()
-    private val storageRef = Firebase.storage.reference
+    private val firestormInstance = FirebaseFirestore.getInstance()
 
     fun saveUserInfoOnCloudFirestore(registrationActivity: RegistrationActivity, currentUser: User) {
-        firestoreInstance.collection(Constant.TABLENAME_USER)
+        firestormInstance.collection(Constant.TABLENAME_USER)
             .document(currentUser.id.toString())
             .set(currentUser, SetOptions.merge())
             .addOnSuccessListener {
@@ -28,7 +28,7 @@ class CloudFirestore {
     fun saveEntryInfoOnCloudFirestore(newEntryActivity: com.example.unscripted.NewEntryActivity, newEntry: Entry) {
         newEntry.userId = getCurrentUserID() // Set the user ID as a field in the Entry object
 
-        firestoreInstance.collection(Constant.TABLENAME_ENTRY)
+        firestormInstance.collection(Constant.TABLENAME_ENTRY)
             .document(newEntry.id.toString())
             .set(newEntry, SetOptions.merge())
             .addOnSuccessListener {
@@ -40,7 +40,7 @@ class CloudFirestore {
     }
 
     fun deleteEntryCloudFirestore(detailActivity:DetailActivity, entry:Entry) {
-        firestoreInstance.collection(Constant.TABLENAME_ENTRY).document(entry.id!!)
+        firestormInstance.collection(Constant.TABLENAME_ENTRY).document(entry.id!!)
             .delete()
             .addOnSuccessListener {
                 detailActivity.deleteEntrySuccess()
@@ -51,7 +51,7 @@ class CloudFirestore {
     }
 
     fun getUserDetails(LoginActivity: LoginActivity) {
-        firestoreInstance
+        firestormInstance
             .collection(Constant.TABLENAME_USER)
             .document(getCurrentUserID())
             .get()
@@ -73,7 +73,7 @@ class CloudFirestore {
     }
 
     fun getAllEntries(onSuccess: (List<Entry>) -> Unit, onFailure: (Exception) -> Unit) {
-        firestoreInstance.collection(Constant.TABLENAME_ENTRY)
+        firestormInstance.collection(Constant.TABLENAME_ENTRY)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 val entries = mutableListOf<Entry>()

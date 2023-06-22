@@ -1,3 +1,6 @@
+// Splash Screen
+// last updated 18.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import android.content.Intent

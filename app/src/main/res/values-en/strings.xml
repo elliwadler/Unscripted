@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--MAIN Screen-->
     <string name="morning_greeting">Good morning </string>
     <string name="day_greeting">Good day </string>
     <string name="evening_greeting">Good evening </string>
@@ -62,6 +63,10 @@
     <string name="Cloud">Cloudy</string>
     <string name="cloud_sun">Changeable</string>
     <string name="sun">Sunny</string>
+    <string name="enterTitle">Please enter a title.</string>
+    <string name="enterText">Please enter a text.</string>
+    <string name="selectMood">Please select an icon from the mood group.</string>
+    <string name="selectWeather">Please select an icon from the weather group.</string>
     <!--Detail Screen-->
     <string name="implemented_soon">This feature will be implemented soon!</string>
     <string name="deleted">Entry deleted!</string>
@@ -69,4 +74,5 @@
     <string name="cancel">Cancel</string>
     <string name="delete_question">Are you sure you want to delete this entry?</string>
     <string name="delete_entry">Delete Entry</string>
+    <string name="success">"Succeeded"</string>
 </resources>

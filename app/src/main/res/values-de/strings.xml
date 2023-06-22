@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--MAIN Screen-->
     <string name="morning_greeting">Guten Morgen </string>
     <string name="day_greeting">Guten Tag </string>
     <string name="evening_greeting">Guten Abend </string>
@@ -25,6 +26,18 @@
     <string name="btn_register_register_text">REGISTRIEREN</string>
     <string name="tv_register_alreadyhaveanaccount_text">Sie haben bereits ein Konto?</string>
     <string name="tv_register_login_text"><u>Login</u></string>
+    <string name="errormessage_login_email">Bitte geben Sie eine E-Mail Adresse ein!</string>
+    <string name="errormessage_login_password">Bitte geben sie ein Passwort ein!</string>
+    <string name="infomessage_forgotpassword_emailtoresetsend">Passwort wurde zurückgesetzt.</string>
+    <string name="errormessage_forgotpassword_emailtoresetsend">Ein Fehler ist aufgetreten.</string>
+    <string name="errormessage_registration_firstName">Bitte geben Sie einen Vornamen ein.</string>
+    <string name="errormessage_registration_lastName">Bitte geben Sie einen Nachnamen ein.</string>
+    <string name="errormessage_registration_email">Bitte geben Sie eine E-mail ein.</string>
+    <string name="errormessage_registration_password">Bitte geben Sie ein Passwort ein.</string>
+    <string name="errormessage_registration_confirmpassword">Bitte bestätigen Sie ihr Passwort.</string>
+    <string name="errormessage_registration_match_confirmpassword">Passwort und Passwortbestätigung stimmen nicht überein.</string>
+    <string name="errormessage_registration_terms">Bitte stimmen sie den Allgemeinen Geschäftsbedingungen zu.</string>
+    <string name="til_register_lastname_hint">Nachname</string>
     <!--FORGET PASSWORD Screen-->
     <string name="tv_forgotpassword_title_text">PASSWORT VERGESSEN</string>
     <string name="tv_forgotpassword_description_text">Bitte geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen eine E-Mail, um Ihr Passwort zurückzusetzen</string>
@@ -50,18 +63,11 @@
     <string name="Cloud">Bewölkt</string>
     <string name="cloud_sun">Wechselhaft</string>
     <string name="sun">Sonnig</string>
-    <string name="errormessage_login_email">Bitte geben Sie eine E-Mail Adresse ein!</string>
-    <string name="errormessage_login_password">Bitte geben sie ein Passwort ein!</string>
-    <string name="infomessage_forgotpassword_emailtoresetsend">Passwort wurde zurückgesetzt.</string>
-    <string name="errormessage_forgotpassword_emailtoresetsend">Ein Fehler ist aufgetreten.</string>
-    <string name="errormessage_registration_firstName">Bitte geben Sie einen Vornamen ein.</string>
-    <string name="errormessage_registration_lastName">Bitte geben Sie einen Nachnamen ein.</string>
-    <string name="errormessage_registration_email">Bitte geben Sie eine E-mail ein.</string>
-    <string name="errormessage_registration_password">Bitte geben Sie ein Passwort ein.</string>
-    <string name="errormessage_registration_confirmpassword">Bitte bestätigen Sie ihr Passwort.</string>
-    <string name="errormessage_registration_match_confirmpassword">Passwort und Passwortbestätigung stimmen nicht überein.</string>
-    <string name="errormessage_registration_terms">Bitte stimmen sie den Allgemeinen Geschäftsbedingungen zu.</string>
-    <string name="til_register_lastname_hint">Nachname</string>
+    <string name="enterTitle">Bitte geben Sie einen Titel ein.</string>
+    <string name="enterText">Bitte geben Sie einen Text ein.</string>
+    <string name="selectMood">Bitte wählen sie ein Stimmungs-Icon.</string>
+    <string name="selectWeather">Bitte wählen Sie ein Wetter-Icon.</string>
+    <string name="success">"Erfolgreich"</string>
     <!--Detail-->
     <string name="implemented_soon">Diese Erweiterung wird bald implementiert!</string>
     <string name="deleted">Eintrag gelöscht!</string>
@@ -69,4 +75,5 @@
     <string name="cancel">Abbrechen</string>
     <string name="delete_question">Sind Sie sich sicher, dass sie diesen Eintrag löschen wollen?</string>
     <string name="delete_entry">Eintrag löschen</string>
+
 </resources>

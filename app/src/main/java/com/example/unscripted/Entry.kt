@@ -1,4 +1,6 @@
-
+// User class
+// last updated 19.06.2023
+// Author Elisabeth Wadler
 import android.os.Parcel
 import android.os.Parcelable
 import java.text.SimpleDateFormat

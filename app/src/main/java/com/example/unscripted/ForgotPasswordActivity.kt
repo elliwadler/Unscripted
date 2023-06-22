@@ -1,3 +1,6 @@
+// Forgot password functionality
+// last updated 20.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import android.os.Bundle

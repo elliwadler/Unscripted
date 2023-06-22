@@ -14,7 +14,7 @@
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:background="@color/pinkish_red"
-        android:padding="@dimen/et_64dp_margin"
+        android:padding="@dimen/D64dp"
         android:src="@drawable/pinkunscripted"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

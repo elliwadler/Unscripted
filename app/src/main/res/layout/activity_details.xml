@@ -25,7 +25,7 @@
             android:textStyle="bold"
             android:text="Memory"
             android:gravity="center"
-            android:textSize="@dimen/tv_20sp_textsize" />
+            android:textSize="@dimen/textsize_20sp" />
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
@@ -33,44 +33,42 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="@dimen/D64dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_detail_activity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/et_8dp_margin">
-
-
+            android:layout_marginTop="@dimen/D8dp">
 
 
             <TextView
                 android:id="@+id/text_title_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="Title"
                 android:letterSpacing="0.2"
-                android:textAlignment="viewStart"
-                android:textSize="@dimen/btn_20sp_textsize"
+                android:textSize="@dimen/textsize_20sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_marginLeft="@dimen/et_16dp_margin"
+                android:layout_marginLeft="@dimen/D16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="MissingConstraints" />
+
 
             <TextView
                 android:id="@+id/text_text_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_16dp_margin"
+                android:layout_marginTop="@dimen/D16dp"
                 android:justificationMode="inter_word"
-                android:paddingStart="@dimen/et_16dp_margin"
-                android:paddingEnd="@dimen/et_16dp_margin"
-                android:lineSpacingExtra="@dimen/m2dp"
+                android:paddingStart="@dimen/D16dp"
+                android:paddingEnd="@dimen/D16dp"
+                android:lineSpacingExtra="@dimen/D2dp"
                 android:textColor="@color/darkgrey"
                 android:text="luam at id ipsum."
-                android:textSize="@dimen/btn_18sp_textsize"
+                android:textSize="@dimen/textsize_18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_title_entry"/>
 
@@ -80,70 +78,70 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:padding="@dimen/et_16dp_margin"
-                android:layout_marginTop="@dimen/et_16dp_margin"
-                android:layout_marginBottom="@dimen/et_16dp_margin"
+                android:padding="@dimen/D16dp"
+                android:layout_marginTop="@dimen/D16dp"
+                android:layout_marginBottom="@dimen/D16dp"
                 android:orientation="vertical"
                 android:gravity="start"
                 app:layout_constraintTop_toBottomOf="@+id/text_text_entry">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/et_8dp_margin">
-                <ImageView
-                    android:id="@+id/iv_detail_emotion"
-                    android:layout_width="@dimen/iv_30dp_margin"
-                    android:layout_height="@dimen/iv_30dp_margin"
-                    />
-                <TextView
-                    android:id="@+id/tv_detail_emotion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/btn_8dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"
-                    android:layout_marginRight="@dimen/btn_8dp_padding"
-                    android:letterSpacing="0.1"
-                    />
-                </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/et_8dp_margin">
-                <ImageView
-                    android:layout_width="@dimen/iv_30dp_margin"
-                    android:layout_height="@dimen/iv_30dp_margin"
-                    android:src="@drawable/clock_icon"
-                     />
-                <TextView
-                    android:id="@+id/tv_detail_clock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/btn_8dp_padding"
-                    android:textSize="@dimen/et_16sp_textsize"
-                    android:letterSpacing="0.1"
-                    android:padding="@dimen/btn_8dp_padding"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/et_8dp_margin">
-                <ImageView
-                    android:id="@+id/iv_detail_weather"
-                    android:layout_width="@dimen/iv_30dp_margin"
-                    android:layout_height="@dimen/iv_30dp_margin"
-                   />
-                <TextView
-                    android:id="@+id/tv_detail_weather"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/et_16sp_textsize"
-                    android:letterSpacing="0.1"
-                    android:padding="@dimen/btn_8dp_padding"/>
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/D8dp">
+                        <ImageView
+                            android:id="@+id/iv_detail_emotion"
+                            android:layout_width="@dimen/D32dp"
+                            android:layout_height="@dimen/D32dp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_detail_emotion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/D8dp"
+                            android:textSize="@dimen/textsize_16sp"
+                            android:layout_marginRight="@dimen/D8dp"
+                            android:letterSpacing="0.1"
+                            />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/D8dp">
+                            <ImageView
+                                android:layout_width="@dimen/D32dp"
+                                android:layout_height="@dimen/D32dp"
+                                android:src="@drawable/clock_icon"
+                                 />
+                            <TextView
+                                android:id="@+id/tv_detail_clock"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/D8dp"
+                                android:textSize="@dimen/textsize_16sp"
+                                android:letterSpacing="0.1"
+                                android:padding="@dimen/D8dp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/D8dp">
+                            <ImageView
+                                android:id="@+id/iv_detail_weather"
+                                android:layout_width="@dimen/D32dp"
+                                android:layout_height="@dimen/D32dp"
+                               />
+                            <TextView
+                                android:id="@+id/tv_detail_weather"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/textsize_16sp"
+                                android:letterSpacing="0.1"
+                                android:padding="@dimen/D8dp"/>
+                        </LinearLayout>
             </LinearLayout>
             <TextView
                 android:id="@+id/text_photo_entry"
@@ -156,7 +154,7 @@
                 android:textAlignment="viewStart"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginLeft="@dimen/et_16dp_margin"
+                android:layout_marginLeft="@dimen/D16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_info" />
             <HorizontalScrollView
@@ -171,17 +169,17 @@
                     android:id="@+id/ll_photos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/et_16dp_margin"
-                    android:layout_marginTop="@dimen/et_16dp_margin"
-                    android:layout_marginBottom="@dimen/et_16dp_margin"
+                    android:padding="@dimen/D16dp"
+                    android:layout_marginTop="@dimen/D16dp"
+                    android:layout_marginBottom="@dimen/D32dp"
                     android:orientation="horizontal">
 
-                    <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:visibility="visible" />
+                        <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="visible" />
 
                 </LinearLayout>
             </HorizontalScrollView>

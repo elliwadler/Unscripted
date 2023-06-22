@@ -1,3 +1,6 @@
+// Activity allows to add new Entrys to firebase and stores images in firestor
+// last updated 22.06.2023
+// Author Elisabeth Wadler
 package com.example.unscripted
 
 import Entry
@@ -192,19 +195,19 @@ class NewEntryActivity : BasisActivity() {
 
         val returnValue = when {
             TextUtils.isEmpty(title) -> {
-                showCustomSnackbar("Please enter a title.", true)
+                showCustomSnackbar(getString(R.string.enterTitle), true)
                 false
             }
             text.isEmpty() -> {
-                showCustomSnackbar("Please enter a text.", true)
+                showCustomSnackbar(getString(R.string.enterText), true)
                 false
             }
             moodIconNumber == -1 -> {
-                showCustomSnackbar("Please select an icon from the mood group.", true)
+                showCustomSnackbar(getString(R.string.selectMood), true)
                 false
             }
             weatherIconNumber == -1 -> {
-                showCustomSnackbar("Please select an icon from the weather group.", true)
+                showCustomSnackbar(getString(R.string.selectWeather), true)
                 false
             }
             else -> true
@@ -294,13 +297,12 @@ class NewEntryActivity : BasisActivity() {
             val linearLayout: LinearLayout = findViewById(R.id.ll_photos)
 
             val imageView = ImageView(this)
-            val sizeInPx = 100.dpToPx()
+            val sizeInPx = 200.dpToPx()
 
             val layoutParams = LinearLayout.LayoutParams(sizeInPx, sizeInPx)
             layoutParams.setMargins(0, 0, 8.dpToPx(), 0)
             imageView.layoutParams = layoutParams
 
-            //imageView.setImageURI(imgUri)
             imageView.setImageBitmap(croppedBitmap)
 
             linearLayout.addView(imageView, layoutParams)
@@ -317,11 +319,8 @@ class NewEntryActivity : BasisActivity() {
 
     private fun uploadImages() {
         val entryId = this.entryId
-
-        if (entryId == null) {
-            // Entry ID not available, handle the error scenario
+            ?:
             return
-        }
 
         for (imageUri in imageUris) {
             val imageId = UUID.randomUUID().toString()
@@ -331,34 +330,15 @@ class NewEntryActivity : BasisActivity() {
             // Upload each image to Firebase Storage
             val uploadTask = uploadRef.putFile(imageUri)
 
-            uploadTask.addOnSuccessListener { taskSnapshot ->
-                val imageUrl = taskSnapshot.metadata?.reference?.downloadUrl.toString()
+            uploadTask.addOnSuccessListener {
+                showCustomSnackbar(getString(R.string.success), false)
 
-                // Save the image URL to Firestore
-                saveImageInfo(entryId, imageId, imageUrl)
-            }.addOnFailureListener { exception ->
-                // Handle the failure scenario
+            }.addOnFailureListener {
+                showCustomSnackbar(getString(R.string.errormessage_forgotpassword_emailtoresetsend), true)
             }
         }
     }
 
-    private fun saveImageInfo(entryId: String, imageId: String, imageUrl: String) {
-        val imagesCollectionRef = db.collection("entries").document(entryId)
-            .collection("images")
-
-        val imageDocRef = imagesCollectionRef.document(imageId)
-        val imageData = hashMapOf(
-            "imageId" to imageId,
-            "imageUrl" to imageUrl
-        )
-        imageDocRef.set(imageData)
-            .addOnSuccessListener {
-                // Image document created successfully with the download URL
-            }
-            .addOnFailureListener { exception ->
-                // Handle unsuccessful document creation
-            }
-    }
     fun newEntrySuccess() {
         onBackPressedDispatcher.onBackPressed()
     }

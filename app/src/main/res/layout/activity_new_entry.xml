@@ -23,12 +23,13 @@
             android:gravity="center"
             android:textStyle="bold"
             android:text="New Entry"
-            android:textSize="@dimen/tv_20sp_textsize" />
+            android:textSize="@dimen/textsize_20sp" />
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/D64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_new_activity"
@@ -37,19 +38,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/et_8dp_margin">
+            android:layout_marginTop="@dimen/D8dp">
 
 
             <TextView
                 android:id="@+id/text_new_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_32dp_margin"
-                android:layout_marginLeft="@dimen/et_16dp_margin"
+                android:layout_marginTop="@dimen/D32dp"
+                android:layout_marginLeft="@dimen/D16dp"
                 android:textStyle="bold"
                 android:text="@string/new_entry"
                 android:textColor="@color/black"
-                android:textSize="@dimen/btn_20sp_textsize"
+                android:textSize="@dimen/textsize_20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="MissingConstraints,UnknownId" />
@@ -58,14 +59,14 @@
                 android:id="@+id/et_new_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_32dp_margin"
+                android:layout_marginTop="@dimen/D32dp"
                 android:hint="What describes today the best?"
-                android:layout_marginLeft="@dimen/et_16dp_margin"
+                android:layout_marginLeft="@dimen/D16dp"
                 android:letterSpacing="0.2"
                 android:textAlignment="viewStart"
                 android:textStyle="bold"
                 android:maxLength="25"
-                android:textSize="@dimen/btn_18sp_textsize"
+                android:textSize="@dimen/textsize_18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_new_date" />
 
@@ -74,17 +75,17 @@
                 android:id="@+id/et_new_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_16dp_margin"
+                android:layout_marginTop="@dimen/D16dp"
                 android:justificationMode="inter_word"
-                android:layout_margin="@dimen/et_16dp_margin"
-                android:paddingLeft="@dimen/et_5dp_margin"
-                android:paddingRight="@dimen/et_5dp_margin"
-                android:paddingEnd="@dimen/et_16dp_margin"
+                android:layout_margin="@dimen/D16dp"
+                android:paddingLeft="@dimen/D5dp"
+                android:paddingRight="@dimen/D5dp"
+                android:paddingEnd="@dimen/D16dp"
                 android:hint="@string/new_entry_text"
-                android:lineSpacingExtra="@dimen/m2dp"
+                android:lineSpacingExtra="@dimen/D2dp"
                 android:textColor="@color/darkgrey"
                 android:textAlignment="viewStart"
-                android:textSize="@dimen/btn_18sp_textsize"
+                android:textSize="@dimen/textsize_18sp"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@
                 android:id="@+id/divider1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/et_32dp_margin"
+                android:layout_marginTop="@dimen/D32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_new_text"/>
@@ -104,17 +105,17 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:padding="@dimen/et_16dp_margin"
+                android:padding="@dimen/D16dp"
 
-                android:layout_marginBottom="@dimen/et_16dp_margin"
+                android:layout_marginBottom="@dimen/D16dp"
                 android:gravity="left|center"
                 app:layout_constraintTop_toBottomOf="@+id/divider1">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mood_text"
-                    android:padding="@dimen/btn_8dp_padding"
-                    android:textSize="@dimen/btn_18sp_textsize"
+                    android:padding="@dimen/D8dp"
+                    android:textSize="@dimen/textsize_18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"></TextView>
 
@@ -122,53 +123,53 @@
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon1ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/crying"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon2ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/sad"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon3ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/neutral"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon4ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/smile"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon5ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/love"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
 
@@ -188,17 +189,17 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:padding="@dimen/et_16dp_margin"
+                android:padding="@dimen/D16dp"
 
-                android:layout_marginBottom="@dimen/et_16dp_margin"
+                android:layout_marginBottom="@dimen/D16dp"
                 android:gravity="left|center"
                 app:layout_constraintTop_toBottomOf="@+id/divider2">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/weather_info"
-                    android:padding="@dimen/btn_8dp_padding"
-                    android:textSize="@dimen/btn_18sp_textsize"
+                    android:padding="@dimen/D8dp"
+                    android:textSize="@dimen/textsize_18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"></TextView>
 
@@ -206,53 +207,53 @@
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_1_ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/snow"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_2_ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/rain"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
 
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_3_ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/cloud"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_4_ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/cloud_sun"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
                 <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/icon_weather_5_ImageView"
-                    android:layout_width="@dimen/Im_40dp"
-                    android:layout_height="@dimen/Im_40dp"
+                    android:layout_width="@dimen/D40dp"
+                    android:layout_height="@dimen/D40dp"
                     android:background="@drawable/icon_item"
                     android:src="@drawable/sun"
-                    android:padding="@dimen/btn_8dp_padding"
+                    android:padding="@dimen/D8dp"
                     android:clickable="true"
                     android:focusable="true" />
 
@@ -270,13 +271,13 @@
                 android:id="@+id/text_photo_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/et_32dp_margin"
+                android:layout_marginTop="@dimen/D32dp"
                 android:text="Photos"
                 android:letterSpacing="0.2"
                 android:textAlignment="viewStart"
-                android:textSize="@dimen/btn_20sp_textsize"
+                android:textSize="@dimen/textsize_20sp"
                 android:textStyle="bold"
-                android:layout_marginLeft="@dimen/et_16dp_margin"
+                android:layout_marginLeft="@dimen/D16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_new_weather" />
             <HorizontalScrollView
@@ -284,16 +285,17 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:scrollbarSize="@dimen/sb_0dp"
+                android:scrollbarSize="@dimen/D0dp"
+                android:layout_marginBottom="@dimen/D32dp"
                 app:layout_constraintTop_toBottomOf="@+id/text_photo_entry">
 
                 <LinearLayout
                     android:id="@+id/ll_photos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/et_16dp_margin"
-                    android:layout_marginTop="@dimen/et_16dp_margin"
-                    android:layout_marginBottom="@dimen/et_16dp_margin"
+                    android:padding="@dimen/D16dp"
+                    android:layout_marginTop="@dimen/D16dp"
+                    android:layout_marginBottom="@dimen/D16dp"
                     android:orientation="horizontal">
 
                 </LinearLayout>
@@ -306,7 +308,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="@dimen/margin_45dp"
+        android:layout_margin="@dimen/D40dp"
         app:backgroundTint="@color/blue"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
         app:srcCompat="@drawable/image"
@@ -319,7 +321,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="@dimen/margin_45dp"
+        android:layout_margin="@dimen/D40dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
         app:srcCompat="@drawable/tick"
         app:layout_constraintBottom_toBottomOf="parent"

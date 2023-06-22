@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Unscripted</string>
-
+    <!--MAIN Screen-->
     <string name="morning_greeting">Good morning </string>
     <string name="day_greeting">Good day </string>
     <string name="evening_greeting">Good evening </string>
@@ -63,6 +63,11 @@
     <string name="Cloud">Cloudy</string>
     <string name="cloud_sun">Changeable</string>
     <string name="sun">Sunny</string>
+    <string name="enterTitle">Please enter a title.</string>
+    <string name="enterText">Please enter a text.</string>
+    <string name="selectMood">Please select an icon from the mood group.</string>
+    <string name="selectWeather">Please select an icon from the weather group.</string>
+    <string name="success">"Succeded"</string>
     <!--Detail Screen-->
     <string name="implemented_soon">This feature will be implemented soon!</string>
     <string name="deleted">Entry deleted!</string>

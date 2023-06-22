@@ -3,7 +3,7 @@
     <item android:state_selected="true">
         <shape android:shape="oval">
             <stroke
-                android:width="@dimen/stroke_1dp"
+                android:width="@dimen/D1dp"
             android:color="@color/blue" />  <!-- Set the desired border color -->
         </shape>
     </item>
